@@ -1,7 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+</script>
 
 <template>
-  <header>
+  <header v-if="route.name !== 'landing'">
     <nav>
       <router-link to="/">Animation</router-link>
       <router-link to="/landing">Landing</router-link>
@@ -9,7 +13,7 @@
     </nav>
   </header>
 
-  <main>
+  <main :class="{ 'landing-main': route.name === 'landing' }">
     <router-view />
   </main>
 </template>
@@ -55,5 +59,11 @@ main {
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
+}
+
+.landing-main {
+  padding-top: 0;
+  height: 100vh;
+  overflow: auto;
 }
 </style>

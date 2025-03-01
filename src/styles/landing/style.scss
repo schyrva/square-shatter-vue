@@ -1,0 +1,14 @@
+@use "utils" as *;
+@use "blocks" as *;
+
+// Override base.css styles for landing page
+html,
+body,
+#app {
+  overflow: auto;
+  height: auto;
+}
+
+.page__body {
+  overflow: visible;
+}
