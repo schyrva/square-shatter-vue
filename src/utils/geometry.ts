@@ -1,4 +1,4 @@
-import { Point, Polygon } from '../types/types';
+import type { Point, Polygon } from '../types/types';
 
 /**
  * Determines which side of a line (p1 → p2) a point p0 is on.

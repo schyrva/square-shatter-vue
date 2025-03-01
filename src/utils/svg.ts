@@ -1,5 +1,5 @@
-import { Fragment, Point } from '../types/types';
-import { STROKE_STYLE, LINE_WIDTH } from '../constants/config';
+import type { Fragment, Point } from "../types/types";
+import { STROKE_STYLE, LINE_WIDTH } from "../constants/config";
 
 /**
  * Creates an SVG polygon element for a fragment
@@ -9,11 +9,16 @@ export function createSvgFragment(
   scale: number,
   squareCenter: Point
 ): SVGPolygonElement {
-  const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+  const polygon = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "polygon"
+  );
 
   // Calculate the scaled centroid position
-  const scaledX = squareCenter.x + scale * (fragment.centroid.x - squareCenter.x);
-  const scaledY = squareCenter.y + scale * (fragment.centroid.y - squareCenter.y);
+  const scaledX =
+    squareCenter.x + scale * (fragment.centroid.x - squareCenter.x);
+  const scaledY =
+    squareCenter.y + scale * (fragment.centroid.y - squareCenter.y);
 
   // Generate points attribute string
   const points = fragment.localOffsets
@@ -22,13 +27,13 @@ export function createSvgFragment(
       const vy = scaledY + offset.y;
       return `${vx},${vy}`;
     })
-    .join(' ');
+    .join(" ");
 
   // Set attributes
-  polygon.setAttribute('points', points);
-  polygon.setAttribute('fill', fragment.color);
-  polygon.setAttribute('stroke', STROKE_STYLE);
-  polygon.setAttribute('stroke-width', LINE_WIDTH.toString());
+  polygon.setAttribute("points", points);
+  polygon.setAttribute("fill", fragment.color);
+  polygon.setAttribute("stroke", STROKE_STYLE);
+  polygon.setAttribute("stroke-width", LINE_WIDTH.toString());
 
   return polygon;
 }
@@ -43,8 +48,10 @@ export function updateSvgFragment(
   squareCenter: Point
 ): void {
   // Calculate the scaled centroid position
-  const scaledX = squareCenter.x + scale * (fragment.centroid.x - squareCenter.x);
-  const scaledY = squareCenter.y + scale * (fragment.centroid.y - squareCenter.y);
+  const scaledX =
+    squareCenter.x + scale * (fragment.centroid.x - squareCenter.x);
+  const scaledY =
+    squareCenter.y + scale * (fragment.centroid.y - squareCenter.y);
 
   // Generate points attribute string
   const points = fragment.localOffsets
@@ -53,10 +60,10 @@ export function updateSvgFragment(
       const vy = scaledY + offset.y;
       return `${vx},${vy}`;
     })
-    .join(' ');
+    .join(" ");
 
   // Update points attribute
-  polygon.setAttribute('points', points);
+  polygon.setAttribute("points", points);
 }
 
 /**

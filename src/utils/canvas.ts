@@ -1,5 +1,5 @@
-import { Fragment, Point } from '../types/types';
-import { STROKE_STYLE, LINE_WIDTH } from '../constants/config';
+import type { Fragment, Point } from "../types/types";
+import { STROKE_STYLE, LINE_WIDTH } from "../constants/config";
 
 /**
  * Draws a single fragment with scaling animation.
@@ -12,8 +12,10 @@ export function drawFragment(
   squareCenter: Point
 ): void {
   // Calculate the scaled centroid position
-  const scaledX = squareCenter.x + scale * (fragment.centroid.x - squareCenter.x);
-  const scaledY = squareCenter.y + scale * (fragment.centroid.y - squareCenter.y);
+  const scaledX =
+    squareCenter.x + scale * (fragment.centroid.x - squareCenter.x);
+  const scaledY =
+    squareCenter.y + scale * (fragment.centroid.y - squareCenter.y);
 
   ctx.beginPath();
 

@@ -1,17 +1,27 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue';
-import { Point, Fragment, Polygon } from '../types/types';
-import { SPEED, MAX_SCALE, AREA_THRESHOLD, MIN_LINES, MAX_LINES } from '../constants/config';
-import { cutPolygonWithLine, computeCentroid, polygonArea } from '../utils/geometry';
-import { generateRandomLines, getRandomColor } from '../utils/random';
-import { drawFragment } from '../utils/canvas';
-import { createSvgFragment, updateSvgFragment, clearSvg } from '../utils/svg';
+import { ref, onMounted, onUnmounted, watch } from "vue";
+import type { Point, Fragment, Polygon } from "../types/types";
+import {
+  SPEED,
+  MAX_SCALE,
+  AREA_THRESHOLD,
+  MIN_LINES,
+  MAX_LINES,
+} from "../constants/config";
+import {
+  cutPolygonWithLine,
+  computeCentroid,
+  polygonArea,
+} from "../utils/geometry";
+import { generateRandomLines, getRandomColor } from "../utils/random";
+import { drawFragment } from "../utils/canvas";
+import { createSvgFragment, updateSvgFragment, clearSvg } from "../utils/svg";
 
 // Refs
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const svgContainerRef = ref<SVGSVGElement | null>(null);
 const useSvg = ref(false);
-const toggleLabel = ref('Canvas');
+const toggleLabel = ref("Canvas");
 
 // Global state variables
 let ctx: CanvasRenderingContext2D | null = null;
@@ -31,7 +41,11 @@ let animationId: number | null = null;
 /**
  * Applies line cutting to multiple polygons.
  */
-function cutPolygonsWithLine(polygons: Polygon[], p1: Point, p2: Point): Polygon[] {
+function cutPolygonsWithLine(
+  polygons: Polygon[],
+  p1: Point,
+  p2: Point
+): Polygon[] {
   let result: Polygon[] = [];
 
   for (const poly of polygons) {
@@ -76,7 +90,8 @@ function createSubdivision(): void {
     ],
   ];
 
-  const lineCount = Math.floor(Math.random() * (MAX_LINES - MIN_LINES + 1)) + MIN_LINES;
+  const lineCount =
+    Math.floor(Math.random() * (MAX_LINES - MIN_LINES + 1)) + MIN_LINES;
   const lines = generateRandomLines(lineCount, innerSquareSize);
 
   const adjustedLines = lines.map(([p1, p2]) => [
@@ -109,6 +124,10 @@ function createSvgElements(): void {
   // Create new SVG elements
   fragments.forEach((fragment) => {
     const polygon = createSvgFragment(fragment, scale, squareCenter);
+
+    // Устанавливаем дополнительные атрибуты для соответствия Canvas
+    polygon.setAttribute("vector-effect", "non-scaling-stroke");
+
     svgContainerRef.value?.appendChild(polygon);
     svgPolygons.push(polygon);
   });
@@ -119,7 +138,9 @@ function createSvgElements(): void {
  */
 function updateSvgElements(): void {
   fragments.forEach((fragment, index) => {
-    updateSvgFragment(svgPolygons[index], fragment, scale, squareCenter);
+    if (index < svgPolygons.length) {
+      updateSvgFragment(svgPolygons[index], fragment, scale, squareCenter);
+    }
   });
 }
 
@@ -129,13 +150,22 @@ function updateSvgElements(): void {
 function resizeCanvas(): void {
   if (!canvasRef.value || !svgContainerRef.value) return;
 
-  canvasWidth = window.innerWidth;
-  canvasHeight = window.innerHeight - 60; // Adjust for header height
+  // Получаем размеры контейнера
+  const container = canvasRef.value.parentElement as HTMLElement;
+  if (!container) return;
+
+  // Устанавливаем размеры canvas и svg по размеру контейнера
+  canvasWidth = container.clientWidth;
+  canvasHeight = container.clientHeight;
 
   canvasRef.value.width = canvasWidth;
   canvasRef.value.height = canvasHeight;
-  svgContainerRef.value.setAttribute('width', canvasWidth.toString());
-  svgContainerRef.value.setAttribute('height', canvasHeight.toString());
+  svgContainerRef.value.setAttribute("width", "100%");
+  svgContainerRef.value.setAttribute("height", "100%");
+  svgContainerRef.value.setAttribute(
+    "viewBox",
+    `0 0 ${canvasWidth} ${canvasHeight}`
+  );
 
   const minDimension = Math.min(canvasWidth, canvasHeight);
   innerSquareSize = minDimension / 4;
@@ -153,18 +183,10 @@ function resizeCanvas(): void {
  * Toggles between Canvas and SVG rendering
  */
 function toggleRenderMode(): void {
-  useSvg.value = !useSvg.value;
-  toggleLabel.value = useSvg.value ? 'SVG' : 'Canvas';
+  toggleLabel.value = useSvg.value ? "SVG" : "Canvas";
 
-  if (canvasRef.value && svgContainerRef.value) {
-    if (useSvg.value) {
-      canvasRef.value.style.display = 'none';
-      svgContainerRef.value.style.display = 'block';
-      createSvgElements();
-    } else {
-      canvasRef.value.style.display = 'block';
-      svgContainerRef.value.style.display = 'none';
-    }
+  if (useSvg.value) {
+    createSvgElements();
   }
 }
 
@@ -207,38 +229,46 @@ function animate(): void {
 // Lifecycle hooks
 onMounted(() => {
   if (canvasRef.value) {
-    ctx = canvasRef.value.getContext('2d');
+    ctx = canvasRef.value.getContext("2d");
   }
 
-  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener("resize", resizeCanvas);
   resizeCanvas();
   animate();
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', resizeCanvas);
+  window.removeEventListener("resize", resizeCanvas);
   if (animationId !== null) {
     cancelAnimationFrame(animationId);
   }
 });
 
 // Watch for changes to useSvg
-watch(useSvg, () => {
-  toggleRenderMode();
-});
+watch(useSvg, toggleRenderMode);
 </script>
 
 <template>
   <div class="square-shatter-container">
     <div class="render-toggle">
-      <label class="switch">
-        <input type="checkbox" v-model="useSvg" />
-        <span class="slider"></span>
-      </label>
-      <span class="toggle-label">{{ toggleLabel }}</span>
+      <div class="toggle-wrapper">
+        <label class="toggle">
+          <input type="checkbox" v-model="useSvg" />
+          <span class="toggle-slider"></span>
+        </label>
+        <span class="toggle-label">{{ toggleLabel }}</span>
+      </div>
     </div>
-    <canvas ref="canvasRef" id="canvas"></canvas>
-    <svg ref="svgContainerRef" id="svg-container" style="display: none"></svg>
+    <canvas
+      ref="canvasRef"
+      id="canvas"
+      :style="{ display: useSvg ? 'none' : 'block' }"
+    ></canvas>
+    <svg
+      ref="svgContainerRef"
+      id="svg-container"
+      :style="{ display: useSvg ? 'block' : 'none' }"
+    ></svg>
   </div>
 </template>
 
@@ -247,47 +277,56 @@ watch(useSvg, () => {
   position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
 
 canvas,
 #svg-container {
-  display: block;
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .render-toggle {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: clamp(10px, 2vw, 20px);
+  right: clamp(10px, 2vw, 20px);
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: clamp(5px, 1vw, 10px) clamp(8px, 1.5vw, 12px);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-wrapper {
   display: flex;
   align-items: center;
-  z-index: 10;
 }
 
 .toggle-label {
-  margin-left: 10px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
+  margin-left: clamp(5px, 1vw, 10px);
+  font-weight: bold;
+  color: #333;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
 }
 
-/* Toggle Switch Styles */
-.switch {
+/* Стили для переключателя */
+.toggle {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: clamp(40px, 8vw, 60px);
+  height: clamp(24px, 4vw, 34px);
 }
 
-.switch input {
+.toggle input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.slider {
+.toggle-slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -299,11 +338,11 @@ canvas,
   border-radius: 34px;
 }
 
-.slider:before {
+.toggle-slider:before {
   position: absolute;
-  content: '';
-  height: 26px;
-  width: 26px;
+  content: "";
+  height: calc(100% - 8px);
+  width: calc(50% - 8px);
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -311,15 +350,15 @@ canvas,
   border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked + .toggle-slider {
   background-color: #2196f3;
 }
 
-input:focus + .slider {
+input:focus + .toggle-slider {
   box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked + .slider:before {
-  transform: translateX(26px);
+input:checked + .toggle-slider:before {
+  transform: translateX(calc(100% + 8px));
 }
 </style>

@@ -1,4 +1,4 @@
-import { Point, Line } from '../types/types';
+import type { Point, Line } from '../types/types';
 import { MIN_RGB, COLOR_RANGE } from '../constants/config';
 
 /**
