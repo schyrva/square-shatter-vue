@@ -1,9 +1,11 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import "./style.css";
 
-// Импорт Quasar
+// Import base styles
+import "./styles/base.css";
+
+// Import Quasar
 import { Quasar } from "quasar";
 import * as QuasarComponents from "quasar";
 import "@quasar/extras/material-icons/material-icons.css";

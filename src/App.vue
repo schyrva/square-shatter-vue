@@ -22,7 +22,7 @@ header {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 100;
-  padding: 0.5rem 1rem;
+  padding: var(--spacing-sm) var(--spacing-md);
   box-sizing: border-box;
 }
 
@@ -35,12 +35,12 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: #333;
+  color: var(--color-text);
   font-weight: 500;
-  padding: 0.5rem clamp(0.5rem, 2vw, 1rem);
-  border-radius: 4px;
-  transition: background-color 0.3s;
-  font-size: clamp(0.8rem, 2vw, 1rem);
+  padding: var(--spacing-sm) clamp(0.5rem, 2vw, 1rem);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+  font-size: var(--font-size-xs);
   white-space: nowrap;
 }
 
@@ -55,22 +55,5 @@ main {
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
-}
-</style>
-
-<style>
-html,
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-}
-
-#app {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
 }
 </style>

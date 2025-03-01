@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import SquareShatter from "../components/SquareShatter.vue";
+import SquareShatter from "../components/SquareShatter/index.vue";
 </script>
 
 <template>
@@ -23,13 +23,13 @@ import SquareShatter from "../components/SquareShatter.vue";
 }
 
 .animation-title {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: var(--font-size-lg);
   margin: 0.5em 0;
   z-index: 10;
   position: relative;
   background-color: rgba(255, 255, 255, 0.7);
   padding: 0.3em 0.8em;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   text-align: center;
   max-width: 90%;
   white-space: nowrap;

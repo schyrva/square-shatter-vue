@@ -1,3 +1,5 @@
+@import "./variables.css";
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -13,43 +15,70 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+/* Style reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-a:hover {
-  color: #535bf2;
+
+/* Base tag styles */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 
 body {
-  margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+}
+
+a {
+  font-weight: 500;
+  color: var(--color-focus);
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: var(--color-hover);
+}
+
+/* Headings */
 h1 {
-  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-size: var(--font-size-xl);
   line-height: 1.2;
   margin: 0.5em 0;
 }
 
 h2 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: var(--font-size-lg);
   line-height: 1.3;
   margin: 0.5em 0;
 }
 
 h3 {
-  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-size: var(--font-size-md);
   line-height: 1.4;
   margin: 0.5em 0;
 }
 
+/* Buttons */
 button {
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -57,11 +86,13 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color var(--transition-fast);
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-focus);
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -71,31 +102,16 @@ button:focus-visible {
   padding: 2em;
 }
 
-#app {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  height: 100vh;
-}
-
+/* Themes */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: var(--color-background);
   }
   a:hover {
-    color: #747bff;
+    color: var(--color-hover);
   }
   button {
     background-color: #f9f9f9;
   }
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
 }

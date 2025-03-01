@@ -1,26 +1,30 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from "vue";
-import type { Point, Fragment, Polygon } from "../types/types";
+import type { Point, Fragment, Polygon } from "../../types/types";
 import {
   SPEED,
   MAX_SCALE,
   AREA_THRESHOLD,
   MIN_LINES,
   MAX_LINES,
-} from "../constants/config";
+} from "../../constants/config";
 import {
   cutPolygonWithLine,
   computeCentroid,
   polygonArea,
-} from "../utils/geometry";
-import { generateRandomLines, getRandomColor } from "../utils/random";
-import { drawFragment } from "../utils/canvas";
-import { createSvgFragment, updateSvgFragment, clearSvg } from "../utils/svg";
-import Toggle from "./ui/Toggle.vue";
-import useRenderMode from "../composables/useRenderMode";
+} from "../../utils/geometry";
+import { generateRandomLines, getRandomColor } from "../../utils/random";
+import { drawFragment } from "../../utils/canvas";
+import {
+  createSvgFragment,
+  updateSvgFragment,
+  clearSvg,
+} from "../../utils/svg";
+import Toggle from "../ui/Toggle.vue";
+import useRenderMode from "../../composables/useRenderMode";
 
-// Используем composable для управления режимом рендеринга
-const { useSvg, toggleLabel } = useRenderMode();
+// Using composable for render mode management
+const { useSvg, toggleLabel, toggleRenderMode } = useRenderMode();
 
 // Refs
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -128,7 +132,7 @@ function createSvgElements(): void {
   fragments.forEach((fragment) => {
     const polygon = createSvgFragment(fragment, scale, squareCenter);
 
-    // Устанавливаем дополнительные атрибуты для соответствия Canvas
+    // Setting additional attributes for Canvas compatibility
     polygon.setAttribute("vector-effect", "non-scaling-stroke");
 
     svgContainerRef.value?.appendChild(polygon);
@@ -153,11 +157,11 @@ function updateSvgElements(): void {
 function resizeCanvas(): void {
   if (!canvasRef.value || !svgContainerRef.value) return;
 
-  // Получаем размеры контейнера
+  // Get container dimensions
   const container = canvasRef.value.parentElement as HTMLElement;
   if (!container) return;
 
-  // Устанавливаем размеры canvas и svg по размеру контейнера
+  // Set canvas and svg dimensions to match container
   canvasWidth = container.clientWidth;
   canvasHeight = container.clientHeight;
 
@@ -218,10 +222,10 @@ function animate(): void {
   }
 }
 
-// Обработчик изменения режима рендеринга
+// Render mode change handler
 function handleRenderModeChange(newValue: boolean) {
   if (newValue) {
-    // Если переключились на SVG, создаем элементы
+    // If switched to SVG, create elements
     createSvgElements();
   }
 }
