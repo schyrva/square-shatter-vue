@@ -194,8 +194,6 @@ function resetFilters() {
   background-color: #f5f5f5;
   border-radius: 8px;
   margin-bottom: 2rem;
-  position: sticky;
-  top: 70px; /* Відступ для хедера */
   z-index: 1;
 }
 

@@ -7,7 +7,7 @@ import { createPinia } from "pinia";
 import "./styles/base.css";
 
 // Import Quasar
-import { Quasar } from "quasar";
+import { Quasar, ClosePopup, Notify, Dialog } from "quasar";
 import * as QuasarComponents from "quasar";
 import "@quasar/extras/material-icons/material-icons.css";
 import "quasar/dist/quasar.css";
@@ -34,9 +34,12 @@ app.use(router);
 app.use(pinia);
 app.use(Quasar, {
   components: QuasarComponents,
+  directives: {
+    ClosePopup,
+  },
   plugins: {
-    Notify: {},
-    Dialog: {},
+    Notify,
+    Dialog,
   },
 });
 

@@ -17,6 +17,15 @@ function addToCart(product: Product) {
     color: "positive",
     position: "top-right",
     timeout: 2000,
+    actions: [
+      {
+        icon: "close",
+        color: "white",
+        handler: () => {
+          /* close */
+        },
+      },
+    ],
   });
 }
 </script>

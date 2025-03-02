@@ -23,6 +23,15 @@ function checkout() {
     color: "info",
     position: "top",
     timeout: 2000,
+    actions: [
+      {
+        icon: "close",
+        color: "white",
+        handler: () => {
+          /* close */
+        },
+      },
+    ],
   });
   cartStore.closeCart();
 }
