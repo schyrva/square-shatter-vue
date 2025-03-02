@@ -1,4 +1,4 @@
-import type { Point, Polygon } from "../types/types";
+import type { Point, Polygon } from '../types/types';
 
 /**
  * Determines which side of a line (p1 → p2) a point p0 is on.
@@ -14,7 +14,7 @@ import type { Point, Polygon } from "../types/types";
  */
 export function lineSide(p1: Point, p2: Point, p0: Point): number {
   if (!p1 || !p2 || !p0) {
-    console.warn("Invalid points provided to lineSide");
+    console.warn('Invalid points provided to lineSide');
     return 0;
   }
 
@@ -40,14 +40,9 @@ export function lineSide(p1: Point, p2: Point, p0: Point): number {
  * @param p4 - End point of second line segment
  * @returns The intersection point if segments intersect, null otherwise
  */
-export function segmentIntersection(
-  p1: Point,
-  p2: Point,
-  p3: Point,
-  p4: Point
-): Point | null {
+export function segmentIntersection(p1: Point, p2: Point, p3: Point, p4: Point): Point | null {
   if (!p1 || !p2 || !p3 || !p4) {
-    console.warn("Invalid points provided to segmentIntersection");
+    console.warn('Invalid points provided to segmentIntersection');
     return null;
   }
 
@@ -57,10 +52,8 @@ export function segmentIntersection(
     return null; // Lines are parallel or coincident
   }
 
-  const ua =
-    ((p4.x - p3.x) * (p1.y - p3.y) - (p4.y - p3.y) * (p1.x - p3.x)) / denom;
-  const ub =
-    ((p2.x - p1.x) * (p1.y - p3.y) - (p2.y - p1.y) * (p1.x - p3.x)) / denom;
+  const ua = ((p4.x - p3.x) * (p1.y - p3.y) - (p4.y - p3.y) * (p1.x - p3.x)) / denom;
+  const ub = ((p2.x - p1.x) * (p1.y - p3.y) - (p2.y - p1.y) * (p1.x - p3.x)) / denom;
 
   // Check if intersection is within both line segments
   if (ua < 0 || ua > 1 || ub < 0 || ub > 1) {
@@ -85,7 +78,7 @@ export function segmentIntersection(
 export function computeCentroid(polygon: Polygon): Point {
   if (!polygon || polygon.length < 3) {
     console.warn(
-      "Invalid polygon provided to computeCentroid. A polygon needs at least 3 vertices."
+      'Invalid polygon provided to computeCentroid. A polygon needs at least 3 vertices.'
     );
     return { x: 0, y: 0 };
   }
@@ -113,9 +106,7 @@ export function computeCentroid(polygon: Polygon): Point {
  */
 export function polygonArea(polygon: Polygon): number {
   if (!polygon || polygon.length < 3) {
-    console.warn(
-      "Invalid polygon provided to polygonArea. A polygon needs at least 3 vertices."
-    );
+    console.warn('Invalid polygon provided to polygonArea. A polygon needs at least 3 vertices.');
     return 0;
   }
 
@@ -138,13 +129,9 @@ export function polygonArea(polygon: Polygon): number {
  * @param p2 - Second point of the cutting line
  * @returns Array of resulting polygons after the cut (1 or 2 polygons)
  */
-export function cutPolygonWithLine(
-  polygon: Polygon,
-  p1: Point,
-  p2: Point
-): Polygon[] {
+export function cutPolygonWithLine(polygon: Polygon, p1: Point, p2: Point): Polygon[] {
   if (!polygon || polygon.length < 3 || !p1 || !p2) {
-    console.warn("Invalid parameters provided to cutPolygonWithLine");
+    console.warn('Invalid parameters provided to cutPolygonWithLine');
     return [polygon];
   }
 

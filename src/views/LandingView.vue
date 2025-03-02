@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Import the landing page styles
-import "../styles/landing/style.scss";
+import '../styles/landing/style.scss';
 </script>
 
 <template>
@@ -30,7 +30,7 @@ import "../styles/landing/style.scss";
         </div>
       </header>
 
-      <aside class="page__menu menu" id="menu">
+      <aside id="menu" class="page__menu menu">
         <div class="container">
           <div class="top-bar menu__top">
             <a href="#top" class="top-bar__logo-link">
@@ -62,12 +62,8 @@ import "../styles/landing/style.scss";
                 </li>
               </ul>
             </nav>
-            <a href="tel:+1 234 5555-55-55" class="menu__phone-number">
-              +1 234 5555-55-55
-            </a>
-            <a href="tel:+1 234 5555-55-55" class="menu__book-a-test-ride">
-              Book a test ride
-            </a>
+            <a href="tel:+1 234 5555-55-55" class="menu__phone-number"> +1 234 5555-55-55 </a>
+            <a href="tel:+1 234 5555-55-55" class="menu__book-a-test-ride"> Book a test ride </a>
           </div>
         </div>
       </aside>
@@ -75,21 +71,16 @@ import "../styles/landing/style.scss";
       <main class="main">
         <div class="container">
           <div class="main__content">
-            <section class="about-us" id="about-us">
-              <h2
-                class="section-title section-title--align-left about-us__title"
-              >
-                Move Free
-              </h2>
+            <section id="about-us" class="about-us">
+              <h2 class="section-title section-title--align-left about-us__title">Move Free</h2>
               <div class="about-us__content">
                 <p class="about-us__description">
-                  Shift your ride, not gears. Find the fastest way to move in
-                  the city as the bike adapts intuitively to power the speed you
-                  need.
+                  Shift your ride, not gears. Find the fastest way to move in the city as the bike
+                  adapts intuitively to power the speed you need.
                 </p>
               </div>
             </section>
-            <section class="compare-bikes" id="compare-bikes">
+            <section id="compare-bikes" class="compare-bikes">
               <h2 class="section-title">Compare Bikes</h2>
               <div class="compare-bikes__products">
                 <article class="product compare-bikes__product">
@@ -100,8 +91,7 @@ import "../styles/landing/style.scss";
                   />
                   <h3 class="product__title">Sporty 4</h3>
                   <p class="product__description">
-                    The iconic frame brought to a new performance height as a
-                    sporty, active ride.
+                    The iconic frame brought to a new performance height as a sporty, active ride.
                   </p>
                   <p class="product__price">$ 2 590</p>
                 </article>
@@ -113,8 +103,8 @@ import "../styles/landing/style.scss";
                   />
                   <h3 class="product__title">Ride in town ST</h3>
                   <p class="product__description">
-                    An open frame for an upright riding position as the most
-                    comfortable ride in town.
+                    An open frame for an upright riding position as the most comfortable ride in
+                    town.
                   </p>
                   <p class="product__price">$ 2 590</p>
                 </article>
@@ -126,14 +116,13 @@ import "../styles/landing/style.scss";
                   />
                   <h3 class="product__title">Agile ride 3</h3>
                   <p class="product__description">
-                    The lightweight frame that has earned its street tread as a
-                    sleek, agile ride.
+                    The lightweight frame that has earned its street tread as a sleek, agile ride.
                   </p>
                   <p class="product__price">$ 2 090</p>
                 </article>
               </div>
             </section>
-            <section class="details" id="details">
+            <section id="details" class="details">
               <h2 class="section-title">The Details</h2>
 
               <div class="details__wrapper">
@@ -157,9 +146,8 @@ import "../styles/landing/style.scss";
                   </div>
                   <h3 class="detail__title">Auto Unlock</h3>
                   <p class="detail__description">
-                    The app senses when you're nearby to unlock automatically.
-                    GPS tracking so you know where your bike is and can track it
-                    anytime.
+                    The app senses when you're nearby to unlock automatically. GPS tracking so you
+                    know where your bike is and can track it anytime.
                   </p>
                 </article>
 
@@ -183,9 +171,8 @@ import "../styles/landing/style.scss";
                   </div>
                   <h3 class="detail__title">Range & Integrated lights</h3>
                   <p class="detail__description">
-                    The removable battery has up to 70km battery autonomy and
-                    weighs only 2.4 kg. Lights integrated into the frame give
-                    you always-on visibility day and night.
+                    The removable battery has up to 70km battery autonomy and weighs only 2.4 kg.
+                    Lights integrated into the frame give you always-on visibility day and night.
                   </p>
                 </article>
 
@@ -207,33 +194,26 @@ import "../styles/landing/style.scss";
                       />
                     </a>
                   </div>
-                  <h3 class="detail__title">
-                    Hydraulic disc brakes & Lightweight
-                  </h3>
+                  <h3 class="detail__title">Hydraulic disc brakes & Lightweight</h3>
                   <p class="detail__description">
-                    Brakes with total stopping power the second you make
-                    contact. The removable battery has up to 70km battery
-                    autonomy and weighs only 2.4 kg. Lights integrated into the
-                    frame give you always-on visibility day and night.
+                    Brakes with total stopping power the second you make contact. The removable
+                    battery has up to 70km battery autonomy and weighs only 2.4 kg. Lights
+                    integrated into the frame give you always-on visibility day and night.
                   </p>
                 </article>
 
                 <div class="details__button">
-                  <a href="#about-us" class="button details__button-link">
-                    Explore
-                  </a>
+                  <a href="#about-us" class="button details__button-link"> Explore </a>
                 </div>
               </div>
             </section>
 
-            <section class="contacts" id="contacts">
-              <h2 class="section-title section-title--contact-us">
-                Contact Us
-              </h2>
+            <section id="contacts" class="contacts">
+              <h2 class="section-title section-title--contact-us">Contact Us</h2>
 
               <div class="contacts__wrapper">
                 <div class="contacts__form">
-                  <form @submit.prevent class="contacts__form-element">
+                  <form class="contacts__form-element" @submit.prevent>
                     <input
                       type="text"
                       placeholder="Name"
@@ -264,32 +244,19 @@ import "../styles/landing/style.scss";
 
                 <div class="contacts__details">
                   <article class="contacts__contact">
-                    <div
-                      class="contacts__contact-item contacts__contact-item--phone"
-                    >
+                    <div class="contacts__contact-item contacts__contact-item--phone">
                       <p class="contacts__contact-title">Phone</p>
-                      <a
-                        href="tel:+123455555555"
-                        class="contacts__contact-link"
-                        id="phone"
-                      >
+                      <a id="phone" href="tel:+123455555555" class="contacts__contact-link">
                         +1 234 5555-55-55
                       </a>
                     </div>
-                    <div
-                      class="contacts__contact-item contacts__contact-item--email"
-                    >
+                    <div class="contacts__contact-item contacts__contact-item--email">
                       <p class="contacts__contact-title">Email</p>
-                      <a
-                        href="mailto:hello@miami.com"
-                        class="contacts__contact-link"
-                      >
+                      <a href="mailto:hello@miami.com" class="contacts__contact-link">
                         hello@miami.com
                       </a>
                     </div>
-                    <div
-                      class="contacts__contact-item contacts__contact-item--address"
-                    >
+                    <div class="contacts__contact-item contacts__contact-item--address">
                       <p class="contacts__contact-title">Adrress</p>
                       <a
                         href="https://maps.app.goo.gl/yhdT9nAqqXWYxCk58"

@@ -1,13 +1,13 @@
-import { defineStore } from "pinia";
-import { ref, computed, watch } from "vue";
-import { useProductStore, type Product } from "./ProductStore";
+import { defineStore } from 'pinia';
+import { ref, computed, watch } from 'vue';
+import { useProductStore, type Product } from './ProductStore';
 
 export interface CartItem {
   productId: number;
   quantity: number;
 }
 
-export const useCartStore = defineStore("cart", () => {
+export const useCartStore = defineStore('cart', () => {
   // State
   const cartItems = ref<CartItem[]>([]);
   const isCartOpen = ref<boolean>(false);
@@ -16,12 +16,12 @@ export const useCartStore = defineStore("cart", () => {
   const productStore = useProductStore();
 
   // Initialize from localStorage if available
-  const savedCart = localStorage.getItem("cart");
+  const savedCart = localStorage.getItem('cart');
   if (savedCart) {
     try {
       cartItems.value = JSON.parse(savedCart);
     } catch (e) {
-      console.error("Error parsing cart from localStorage:", e);
+      console.error('Error parsing cart from localStorage:', e);
     }
   }
 
@@ -29,7 +29,7 @@ export const useCartStore = defineStore("cart", () => {
   watch(
     cartItems,
     (items) => {
-      localStorage.setItem("cart", JSON.stringify(items));
+      localStorage.setItem('cart', JSON.stringify(items));
     },
     { deep: true }
   );
@@ -59,9 +59,7 @@ export const useCartStore = defineStore("cart", () => {
 
   // Actions
   function addToCart(productId: number, quantity = 1) {
-    const existingItem = cartItems.value.find(
-      (item) => item.productId === productId
-    );
+    const existingItem = cartItems.value.find((item) => item.productId === productId);
 
     if (existingItem) {
       existingItem.quantity += quantity;
@@ -71,9 +69,7 @@ export const useCartStore = defineStore("cart", () => {
   }
 
   function removeFromCart(productId: number) {
-    const index = cartItems.value.findIndex(
-      (item) => item.productId === productId
-    );
+    const index = cartItems.value.findIndex((item) => item.productId === productId);
     if (index !== -1) {
       cartItems.value.splice(index, 1);
     }

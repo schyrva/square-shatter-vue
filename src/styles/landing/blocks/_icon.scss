@@ -1,4 +1,4 @@
-@use "../utils" as *;
+@use '../utils' as *;
 
 .icon {
   display: block;
@@ -21,12 +21,14 @@
     align-items: center;
 
     &::before {
-      content: "+1 234 555-55-55";
+      content: '+1 234 555-55-55';
       position: absolute;
       white-space: nowrap;
       left: -120px;
       opacity: 0;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
       transform: translateX(-20px);
       font-size: 12px;
       color: $main-text-color;

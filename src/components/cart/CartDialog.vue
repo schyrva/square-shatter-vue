@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { useCartStore } from "../../stores/CartStore";
-import { useQuasar } from "quasar";
+import { computed } from 'vue';
+import { useCartStore } from '../../stores/CartStore';
+import { useQuasar } from 'quasar';
 
 const $q = useQuasar();
 const cartStore = useCartStore();
@@ -19,14 +19,14 @@ const formatPrice = (price: number) => {
 
 function checkout() {
   $q.notify({
-    message: "Checkout not implemented in this demo",
-    color: "info",
-    position: "top",
+    message: 'Checkout not implemented in this demo',
+    color: 'info',
+    position: 'top',
     timeout: 2000,
     actions: [
       {
-        icon: "close",
-        color: "white",
+        icon: 'close',
+        color: 'white',
         handler: () => {
           /* close */
         },
@@ -38,43 +38,23 @@ function checkout() {
 </script>
 
 <template>
-  <q-dialog
-    v-model="visible"
-    :maximized="$q.screen.lt.sm"
-    position="right"
-    persistent
-    full-width
-  >
+  <q-dialog v-model="visible" :maximized="$q.screen.lt.sm" position="right" persistent full-width>
     <q-card class="cart-dialog">
       <q-card-section class="row items-center q-pb-none">
         <div class="text-h6">Your Cart</div>
         <q-space />
-        <q-btn
-          v-close-popup
-          icon="close"
-          flat
-          round
-          dense
-          @click="cartStore.closeCart"
-        />
+        <q-btn v-close-popup icon="close" flat round dense @click="cartStore.closeCart" />
       </q-card-section>
 
       <q-card-section>
         <div v-if="cartStore.totalItems === 0" class="empty-cart-message">
           <q-icon name="shopping_cart" size="6rem" color="grey-5" />
           <p>Your cart is empty</p>
-          <q-btn
-            label="Continue Shopping"
-            color="primary"
-            @click="cartStore.closeCart"
-          />
+          <q-btn label="Continue Shopping" color="primary" @click="cartStore.closeCart" />
         </div>
 
         <q-list v-else bordered separator>
-          <q-item
-            v-for="item in cartStore.cartProducts"
-            :key="item.item.productId"
-          >
+          <q-item v-for="item in cartStore.cartProducts" :key="item.item.productId">
             <q-item-section avatar>
               <q-img
                 :src="item.product?.image"
@@ -84,9 +64,7 @@ function checkout() {
 
             <q-item-section>
               <q-item-label>{{ item.product?.name }}</q-item-label>
-              <q-item-label caption>{{
-                formatPrice(item.product?.price || 0)
-              }}</q-item-label>
+              <q-item-label caption>{{ formatPrice(item.product?.price || 0) }}</q-item-label>
             </q-item-section>
 
             <q-item-section side>
@@ -96,12 +74,7 @@ function checkout() {
                   dense
                   round
                   icon="remove"
-                  @click="
-                    cartStore.updateQuantity(
-                      item.item.productId,
-                      item.item.quantity - 1
-                    )
-                  "
+                  @click="cartStore.updateQuantity(item.item.productId, item.item.quantity - 1)"
                 />
                 <span class="quantity">{{ item.item.quantity }}</span>
                 <q-btn
@@ -109,12 +82,7 @@ function checkout() {
                   dense
                   round
                   icon="add"
-                  @click="
-                    cartStore.updateQuantity(
-                      item.item.productId,
-                      item.item.quantity + 1
-                    )
-                  "
+                  @click="cartStore.updateQuantity(item.item.productId, item.item.quantity + 1)"
                 />
               </div>
             </q-item-section>
@@ -143,12 +111,7 @@ function checkout() {
           <div class="text-h6">{{ formatPrice(cartStore.totalPrice) }}</div>
         </div>
         <div class="row justify-between q-mt-lg">
-          <q-btn
-            label="Continue Shopping"
-            outline
-            color="primary"
-            @click="cartStore.closeCart"
-          />
+          <q-btn label="Continue Shopping" outline color="primary" @click="cartStore.closeCart" />
           <q-btn label="Checkout" color="primary" @click="checkout" />
         </div>
       </q-card-section>

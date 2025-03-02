@@ -6,12 +6,12 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: boolean): void;
+  (e: 'update:modelValue', value: boolean): void;
 }>();
 
 function toggle(event: Event) {
   const target = event.target as HTMLInputElement;
-  emit("update:modelValue", target.checked);
+  emit('update:modelValue', target.checked);
 }
 </script>
 
@@ -66,7 +66,7 @@ function toggle(event: Event) {
 
 .toggle-slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: calc(100% - 8px);
   width: calc(50% - 8px);
   left: 4px;

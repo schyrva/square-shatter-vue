@@ -1,25 +1,11 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted, onUnmounted, watch } from "vue";
-import type { Point, Fragment, Polygon } from "../../types/types";
-import {
-  SPEED,
-  MAX_SCALE,
-  AREA_THRESHOLD,
-  MIN_LINES,
-  MAX_LINES,
-} from "../../constants/config";
-import {
-  cutPolygonWithLine,
-  computeCentroid,
-  polygonArea,
-} from "../../utils/geometry";
-import { generateRandomLines, getRandomColor } from "../../utils/random";
-import { drawFragment } from "../../utils/canvas";
-import {
-  createSvgFragment,
-  updateSvgFragment,
-  clearSvg,
-} from "../../utils/svg";
+import { ref, reactive, onMounted, onUnmounted, watch } from 'vue';
+import type { Point, Fragment, Polygon } from '../../types/types';
+import { SPEED, MAX_SCALE, AREA_THRESHOLD, MIN_LINES, MAX_LINES } from '../../constants/config';
+import { cutPolygonWithLine, computeCentroid, polygonArea } from '../../utils/geometry';
+import { generateRandomLines, getRandomColor } from '../../utils/random';
+import { drawFragment } from '../../utils/canvas';
+import { createSvgFragment, updateSvgFragment, clearSvg } from '../../utils/svg';
 
 // Props
 const props = defineProps<{
@@ -50,11 +36,7 @@ const state = reactive({
 /**
  * Applies line cutting to multiple polygons.
  */
-function cutPolygonsWithLine(
-  polygons: Polygon[],
-  p1: Point,
-  p2: Point
-): Polygon[] {
+function cutPolygonsWithLine(polygons: Polygon[], p1: Point, p2: Point): Polygon[] {
   let result: Polygon[] = [];
 
   for (const poly of polygons) {
@@ -102,8 +84,7 @@ function createSubdivision(): void {
     ],
   ];
 
-  const lineCount =
-    Math.floor(Math.random() * (MAX_LINES - MIN_LINES + 1)) + MIN_LINES;
+  const lineCount = Math.floor(Math.random() * (MAX_LINES - MIN_LINES + 1)) + MIN_LINES;
   const lines = generateRandomLines(lineCount, state.innerSquareSize);
 
   const adjustedLines = lines.map(([p1, p2]) => [
@@ -135,14 +116,10 @@ function createSvgElements(): void {
 
   // Create new SVG elements
   state.fragments.forEach((fragment) => {
-    const polygon = createSvgFragment(
-      fragment,
-      state.scale,
-      state.squareCenter
-    );
+    const polygon = createSvgFragment(fragment, state.scale, state.squareCenter);
 
     // Setting additional attributes for Canvas compatibility
-    polygon.setAttribute("vector-effect", "non-scaling-stroke");
+    polygon.setAttribute('vector-effect', 'non-scaling-stroke');
 
     svgContainerRef.value?.appendChild(polygon);
     state.svgPolygons.push(polygon);
@@ -155,12 +132,7 @@ function createSvgElements(): void {
 function updateSvgElements(): void {
   state.fragments.forEach((fragment, index) => {
     if (index < state.svgPolygons.length) {
-      updateSvgFragment(
-        state.svgPolygons[index],
-        fragment,
-        state.scale,
-        state.squareCenter
-      );
+      updateSvgFragment(state.svgPolygons[index], fragment, state.scale, state.squareCenter);
     }
   });
 }
@@ -181,12 +153,9 @@ function resizeCanvas(): void {
 
   canvasRef.value.width = state.canvasWidth;
   canvasRef.value.height = state.canvasHeight;
-  svgContainerRef.value.setAttribute("width", "100%");
-  svgContainerRef.value.setAttribute("height", "100%");
-  svgContainerRef.value.setAttribute(
-    "viewBox",
-    `0 0 ${state.canvasWidth} ${state.canvasHeight}`
-  );
+  svgContainerRef.value.setAttribute('width', '100%');
+  svgContainerRef.value.setAttribute('height', '100%');
+  svgContainerRef.value.setAttribute('viewBox', `0 0 ${state.canvasWidth} ${state.canvasHeight}`);
 
   const minDimension = Math.min(state.canvasWidth, state.canvasHeight);
   state.innerSquareSize = minDimension / 4;
@@ -249,16 +218,16 @@ function handleRenderModeChange(newValue: boolean) {
 // Lifecycle hooks
 onMounted(() => {
   if (canvasRef.value) {
-    state.ctx = canvasRef.value.getContext("2d");
+    state.ctx = canvasRef.value.getContext('2d');
   }
 
-  window.addEventListener("resize", resizeCanvas);
+  window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
   animate();
 });
 
 onUnmounted(() => {
-  window.removeEventListener("resize", resizeCanvas);
+  window.removeEventListener('resize', resizeCanvas);
   if (state.animationId !== null) {
     cancelAnimationFrame(state.animationId);
   }

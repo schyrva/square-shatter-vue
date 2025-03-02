@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SquareShatterComponent from "./SquareShatter.vue";
+import SquareShatterComponent from './SquareShatter.vue';
 
 // Re-exporting component for easier imports
 // We need to define props and proxy them along with other attributes

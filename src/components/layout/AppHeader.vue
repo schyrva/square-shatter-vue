@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
-import CartIcon from "../cart/CartIcon.vue";
-import { computed, ref } from "vue";
+import { useRoute } from 'vue-router';
+import CartIcon from '../cart/CartIcon.vue';
+import { computed, ref } from 'vue';
 
 const route = useRoute();
 const isMenuOpen = ref(false);
@@ -13,7 +13,7 @@ const showCart = computed(() => {
 
 // Перевіряємо, чи зараз відображається сторінка landing
 const isLandingPage = computed(() => {
-  return route.path === "/landing";
+  return route.path === '/landing';
 });
 
 // Функція для перемикання стану меню
@@ -128,7 +128,8 @@ function closeMenu() {
   font-weight: 500;
   padding: var(--spacing-sm) clamp(0.5rem, 1.5vw, 1rem);
   border-radius: var(--radius-md);
-  transition: background-color var(--transition-fast),
+  transition:
+    background-color var(--transition-fast),
     color var(--transition-fast);
   font-size: var(--font-size-sm);
   white-space: nowrap;

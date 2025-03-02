@@ -51,7 +51,7 @@ const currentYear = new Date().getFullYear();
 }
 
 .author-link::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 0;
   height: 2px;

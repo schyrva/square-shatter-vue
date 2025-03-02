@@ -1,23 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from "vue";
-import type { Point, Fragment, Polygon } from "../types/types";
-import {
-  SPEED,
-  MAX_SCALE,
-  AREA_THRESHOLD,
-  MIN_LINES,
-  MAX_LINES,
-} from "../constants/config";
-import {
-  cutPolygonWithLine,
-  computeCentroid,
-  polygonArea,
-} from "../utils/geometry";
-import { generateRandomLines, getRandomColor } from "../utils/random";
-import { drawFragment } from "../utils/canvas";
-import { createSvgFragment, updateSvgFragment, clearSvg } from "../utils/svg";
-import Toggle from "./ui/Toggle.vue";
-import useRenderMode from "../composables/useRenderMode";
+import { ref, onMounted, onUnmounted, watch } from 'vue';
+import type { Point, Fragment, Polygon } from '../types/types';
+import { SPEED, MAX_SCALE, AREA_THRESHOLD, MIN_LINES, MAX_LINES } from '../constants/config';
+import { cutPolygonWithLine, computeCentroid, polygonArea } from '../utils/geometry';
+import { generateRandomLines, getRandomColor } from '../utils/random';
+import { drawFragment } from '../utils/canvas';
+import { createSvgFragment, updateSvgFragment, clearSvg } from '../utils/svg';
+import Toggle from './ui/Toggle.vue';
+import useRenderMode from '../composables/useRenderMode';
 
 // Используем composable для управления режимом рендеринга
 const { useSvg, toggleLabel } = useRenderMode();
@@ -44,11 +34,7 @@ let animationId: number | null = null;
 /**
  * Applies line cutting to multiple polygons.
  */
-function cutPolygonsWithLine(
-  polygons: Polygon[],
-  p1: Point,
-  p2: Point
-): Polygon[] {
+function cutPolygonsWithLine(polygons: Polygon[], p1: Point, p2: Point): Polygon[] {
   let result: Polygon[] = [];
 
   for (const poly of polygons) {
@@ -93,8 +79,7 @@ function createSubdivision(): void {
     ],
   ];
 
-  const lineCount =
-    Math.floor(Math.random() * (MAX_LINES - MIN_LINES + 1)) + MIN_LINES;
+  const lineCount = Math.floor(Math.random() * (MAX_LINES - MIN_LINES + 1)) + MIN_LINES;
   const lines = generateRandomLines(lineCount, innerSquareSize);
 
   const adjustedLines = lines.map(([p1, p2]) => [
@@ -129,7 +114,7 @@ function createSvgElements(): void {
     const polygon = createSvgFragment(fragment, scale, squareCenter);
 
     // Устанавливаем дополнительные атрибуты для соответствия Canvas
-    polygon.setAttribute("vector-effect", "non-scaling-stroke");
+    polygon.setAttribute('vector-effect', 'non-scaling-stroke');
 
     svgContainerRef.value?.appendChild(polygon);
     svgPolygons.push(polygon);
@@ -163,12 +148,9 @@ function resizeCanvas(): void {
 
   canvasRef.value.width = canvasWidth;
   canvasRef.value.height = canvasHeight;
-  svgContainerRef.value.setAttribute("width", "100%");
-  svgContainerRef.value.setAttribute("height", "100%");
-  svgContainerRef.value.setAttribute(
-    "viewBox",
-    `0 0 ${canvasWidth} ${canvasHeight}`
-  );
+  svgContainerRef.value.setAttribute('width', '100%');
+  svgContainerRef.value.setAttribute('height', '100%');
+  svgContainerRef.value.setAttribute('viewBox', `0 0 ${canvasWidth} ${canvasHeight}`);
 
   const minDimension = Math.min(canvasWidth, canvasHeight);
   innerSquareSize = minDimension / 4;
@@ -229,16 +211,16 @@ function handleRenderModeChange(newValue: boolean) {
 // Lifecycle hooks
 onMounted(() => {
   if (canvasRef.value) {
-    ctx = canvasRef.value.getContext("2d");
+    ctx = canvasRef.value.getContext('2d');
   }
 
-  window.addEventListener("resize", resizeCanvas);
+  window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
   animate();
 });
 
 onUnmounted(() => {
-  window.removeEventListener("resize", resizeCanvas);
+  window.removeEventListener('resize', resizeCanvas);
   if (animationId !== null) {
     cancelAnimationFrame(animationId);
   }
@@ -253,14 +235,10 @@ watch(useSvg, handleRenderModeChange);
     <div class="render-toggle">
       <Toggle v-model="useSvg" :label="toggleLabel" />
     </div>
-    <canvas
-      ref="canvasRef"
-      id="canvas"
-      :style="{ display: useSvg ? 'none' : 'block' }"
-    ></canvas>
+    <canvas id="canvas" ref="canvasRef" :style="{ display: useSvg ? 'none' : 'block' }"></canvas>
     <svg
-      ref="svgContainerRef"
       id="svg-container"
+      ref="svgContainerRef"
       :style="{ display: useSvg ? 'block' : 'none' }"
     ></svg>
   </div>

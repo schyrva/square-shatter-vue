@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { useCartStore } from "../../stores/CartStore";
-import { useQuasar } from "quasar";
-import type { Product } from "../../stores/ProductStore";
+import { ref, computed } from 'vue';
+import { useCartStore } from '../../stores/CartStore';
+import { useQuasar } from 'quasar';
+import type { Product } from '../../stores/ProductStore';
 
 const props = defineProps<{
   product: Product | null;
@@ -10,7 +10,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "update:visible", value: boolean): void;
+  (e: 'update:visible', value: boolean): void;
 }>();
 
 const cartStore = useCartStore();
@@ -20,7 +20,7 @@ const quantity = ref(1);
 const dialogVisible = computed({
   get: () => props.visible,
   set: (value) => {
-    emit("update:visible", value);
+    emit('update:visible', value);
     // Reset quantity when dialog closes
     if (!value) {
       quantity.value = 1;
@@ -33,13 +33,13 @@ function addToCart() {
     cartStore.addToCart(props.product.id, quantity.value);
     $q.notify({
       message: `${quantity.value} ${props.product.name} added to cart`,
-      color: "positive",
-      position: "top-right",
+      color: 'positive',
+      position: 'top-right',
       timeout: 2000,
       actions: [
         {
-          icon: "close",
-          color: "white",
+          icon: 'close',
+          color: 'white',
           handler: () => {
             /* close */
           },
@@ -68,10 +68,7 @@ function closeDialog() {
 
       <q-card-section class="row q-col-gutter-md">
         <div class="col-12 col-sm-6">
-          <q-img
-            :src="product.image"
-            style="width: 100%; height: 300px; object-fit: contain"
-          />
+          <q-img :src="product.image" style="width: 100%; height: 300px; object-fit: contain" />
         </div>
 
         <div class="col-12 col-sm-6">
@@ -80,20 +77,10 @@ function closeDialog() {
           </div>
 
           <div class="q-mb-md">
-            <q-rating
-              v-model="product.rating"
-              :max="5"
-              size="1.5em"
-              color="amber"
-              readonly
-            />
+            <q-rating v-model="product.rating" :max="5" size="1.5em" color="amber" readonly />
           </div>
 
-          <q-chip
-            color="primary"
-            text-color="white"
-            class="q-mb-md text-capitalize"
-          >
+          <q-chip color="primary" text-color="white" class="q-mb-md text-capitalize">
             {{ product.category }}
           </q-chip>
 
@@ -111,31 +98,16 @@ function closeDialog() {
                 style="max-width: 120px"
               >
                 <template v-slot:prepend>
-                  <q-btn
-                    icon="remove"
-                    flat
-                    dense
-                    @click="quantity = Math.max(1, quantity - 1)"
-                  />
+                  <q-btn icon="remove" flat dense @click="quantity = Math.max(1, quantity - 1)" />
                 </template>
                 <template v-slot:append>
-                  <q-btn
-                    icon="add"
-                    flat
-                    dense
-                    @click="quantity = Math.min(99, quantity + 1)"
-                  />
+                  <q-btn icon="add" flat dense @click="quantity = Math.min(99, quantity + 1)" />
                 </template>
               </q-input>
             </div>
 
             <div class="col-6 text-right">
-              <q-btn
-                color="primary"
-                icon="shopping_cart"
-                label="Add to Cart"
-                @click="addToCart"
-              />
+              <q-btn color="primary" icon="shopping_cart" label="Add to Cart" @click="addToCart" />
             </div>
           </div>
         </div>

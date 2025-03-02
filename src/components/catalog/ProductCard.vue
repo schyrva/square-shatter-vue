@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useCartStore } from "../../stores/CartStore";
-import { useQuasar } from "quasar";
-import type { Product } from "../../stores/ProductStore";
+import { useCartStore } from '../../stores/CartStore';
+import { useQuasar } from 'quasar';
+import type { Product } from '../../stores/ProductStore';
 
 const props = defineProps<{
   product: Product;
@@ -14,13 +14,13 @@ function addToCart(product: Product) {
   cartStore.addToCart(product.id);
   $q.notify({
     message: `${product.name} added to cart`,
-    color: "positive",
-    position: "top-right",
+    color: 'positive',
+    position: 'top-right',
     timeout: 2000,
     actions: [
       {
-        icon: "close",
-        color: "white",
+        icon: 'close',
+        color: 'white',
         handler: () => {
           /* close */
         },
@@ -43,22 +43,11 @@ function addToCart(product: Product) {
           </div>
         </div>
         <div class="col-auto">
-          <q-rating
-            v-model="product.rating"
-            :max="5"
-            size="1.5em"
-            color="amber"
-            readonly
-          />
+          <q-rating v-model="product.rating" :max="5" size="1.5em" color="amber" readonly />
         </div>
       </div>
 
-      <q-chip
-        color="primary"
-        text-color="white"
-        size="sm"
-        class="q-mt-sm text-capitalize"
-      >
+      <q-chip color="primary" text-color="white" size="sm" class="q-mt-sm text-capitalize">
         {{ product.category }}
       </q-chip>
     </q-card-section>
@@ -68,18 +57,8 @@ function addToCart(product: Product) {
     </q-card-section>
 
     <q-card-actions align="right">
-      <q-btn
-        flat
-        color="primary"
-        label="Details"
-        @click="$emit('view-details', product)"
-      />
-      <q-btn
-        color="primary"
-        icon="shopping_cart"
-        label="Add to Cart"
-        @click="addToCart(product)"
-      />
+      <q-btn flat color="primary" label="Details" @click="$emit('view-details', product)" />
+      <q-btn color="primary" icon="shopping_cart" label="Add to Cart" @click="addToCart(product)" />
     </q-card-actions>
   </q-card>
 </template>
@@ -90,7 +69,9 @@ function addToCart(product: Product) {
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 .product-card:hover {

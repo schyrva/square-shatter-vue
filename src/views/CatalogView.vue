@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
-import { useProductStore } from "../stores/ProductStore";
-import ProductCard from "../components/catalog/ProductCard.vue";
-import ProductDetails from "../components/catalog/ProductDetails.vue";
-import CartDialog from "../components/cart/CartDialog.vue";
-import { useCartStore } from "../stores/CartStore";
-import type { Product } from "../stores/ProductStore";
+import { ref, computed, onMounted } from 'vue';
+import { useProductStore } from '../stores/ProductStore';
+import ProductCard from '../components/catalog/ProductCard.vue';
+import ProductDetails from '../components/catalog/ProductDetails.vue';
+import CartDialog from '../components/cart/CartDialog.vue';
+import { useCartStore } from '../stores/CartStore';
+import type { Product } from '../stores/ProductStore';
 
 const productStore = useProductStore();
 const cartStore = useCartStore();
 
 // Filters
-const selectedCategory = ref<string>("all");
-const searchQuery = ref<string>("");
-const sortBy = ref<string>("name-asc");
+const selectedCategory = ref<string>('all');
+const searchQuery = ref<string>('');
+const sortBy = ref<string>('name-asc');
 
 // Selected product for details modal
 const selectedProduct = ref<Product | null>(null);
@@ -24,10 +24,8 @@ const filteredProducts = computed(() => {
   let result = productStore.products;
 
   // Apply category filter
-  if (selectedCategory.value !== "all") {
-    result = result.filter(
-      (product) => product.category === selectedCategory.value
-    );
+  if (selectedCategory.value !== 'all') {
+    result = result.filter((product) => product.category === selectedCategory.value);
   }
 
   // Apply search filter
@@ -41,19 +39,19 @@ const filteredProducts = computed(() => {
   }
 
   // Apply sorting
-  const [field, direction] = sortBy.value.split("-");
+  const [field, direction] = sortBy.value.split('-');
   result = [...result].sort((a, b) => {
     let comparison = 0;
 
-    if (field === "name") {
+    if (field === 'name') {
       comparison = a.name.localeCompare(b.name);
-    } else if (field === "price") {
+    } else if (field === 'price') {
       comparison = a.price - b.price;
-    } else if (field === "rating") {
+    } else if (field === 'rating') {
       comparison = a.rating - b.rating;
     }
 
-    return direction === "asc" ? comparison : -comparison;
+    return direction === 'asc' ? comparison : -comparison;
   });
 
   return result;
@@ -67,9 +65,9 @@ function viewProductDetails(product: Product) {
 
 // Reset filters
 function resetFilters() {
-  selectedCategory.value = "all";
-  searchQuery.value = "";
-  sortBy.value = "name-asc";
+  selectedCategory.value = 'all';
+  searchQuery.value = '';
+  sortBy.value = 'name-asc';
 }
 </script>
 
@@ -85,13 +83,7 @@ function resetFilters() {
     <div class="filters-container q-pa-md">
       <div class="row q-col-gutter-md">
         <div class="col-12 col-sm-6 col-md-3">
-          <q-input
-            v-model="searchQuery"
-            outlined
-            dense
-            placeholder="Search products..."
-            clearable
-          >
+          <q-input v-model="searchQuery" outlined dense placeholder="Search products..." clearable>
             <template v-slot:append>
               <q-icon name="search" />
             </template>
@@ -167,10 +159,7 @@ function resetFilters() {
     </div>
 
     <!-- Modals -->
-    <ProductDetails
-      v-model:visible="productDetailsVisible"
-      :product="selectedProduct"
-    />
+    <ProductDetails v-model:visible="productDetailsVisible" :product="selectedProduct" />
 
     <CartDialog />
   </div>
@@ -208,12 +197,16 @@ function resetFilters() {
   background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   border-radius: var(--radius-lg);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
 .catalog-header:hover {
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 6px 30px rgba(0, 0, 0, 0.15),
+    0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .catalog-title {
