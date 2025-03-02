@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from "vue";
+import { ref, reactive, onMounted, onUnmounted, watch } from "vue";
 import type { Point, Fragment, Polygon } from "../../types/types";
 import {
   SPEED,
@@ -30,20 +30,22 @@ const { useSvg, toggleLabel, toggleRenderMode } = useRenderMode();
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const svgContainerRef = ref<SVGSVGElement | null>(null);
 
-// Global state variables
-let ctx: CanvasRenderingContext2D | null = null;
-let canvasWidth = 0;
-let canvasHeight = 0;
-let innerSquareSize = 0;
-let offsetX = 0;
-let offsetY = 0;
-let squareCenter: Point = { x: 0, y: 0 };
-let fragments: Fragment[] = [];
-let svgPolygons: SVGPolygonElement[] = [];
-let subdivisionGenerated = false;
-let scale = 1.0;
-let growing = true;
-let animationId: number | null = null;
+// Global state variables grouped using reactive for better state management
+const state = reactive({
+  ctx: null as CanvasRenderingContext2D | null,
+  canvasWidth: 0,
+  canvasHeight: 0,
+  innerSquareSize: 0,
+  offsetX: 0,
+  offsetY: 0,
+  squareCenter: { x: 0, y: 0 } as Point,
+  fragments: [] as Fragment[],
+  svgPolygons: [] as SVGPolygonElement[],
+  subdivisionGenerated: false,
+  scale: 1.0,
+  growing: true,
+  animationId: null as number | null,
+});
 
 /**
  * Applies line cutting to multiple polygons.
@@ -90,27 +92,30 @@ function polygonsToFragments(polygons: Polygon[]): Fragment[] {
 function createSubdivision(): void {
   let polygons: Polygon[] = [
     [
-      { x: offsetX, y: offsetY },
-      { x: offsetX + innerSquareSize, y: offsetY },
-      { x: offsetX + innerSquareSize, y: offsetY + innerSquareSize },
-      { x: offsetX, y: offsetY + innerSquareSize },
+      { x: state.offsetX, y: state.offsetY },
+      { x: state.offsetX + state.innerSquareSize, y: state.offsetY },
+      {
+        x: state.offsetX + state.innerSquareSize,
+        y: state.offsetY + state.innerSquareSize,
+      },
+      { x: state.offsetX, y: state.offsetY + state.innerSquareSize },
     ],
   ];
 
   const lineCount =
     Math.floor(Math.random() * (MAX_LINES - MIN_LINES + 1)) + MIN_LINES;
-  const lines = generateRandomLines(lineCount, innerSquareSize);
+  const lines = generateRandomLines(lineCount, state.innerSquareSize);
 
   const adjustedLines = lines.map(([p1, p2]) => [
-    { x: p1.x + offsetX, y: p1.y + offsetY },
-    { x: p2.x + offsetX, y: p2.y + offsetY },
+    { x: p1.x + state.offsetX, y: p1.y + state.offsetY },
+    { x: p2.x + state.offsetX, y: p2.y + state.offsetY },
   ]);
 
   for (const [p1, p2] of adjustedLines) {
     polygons = cutPolygonsWithLine(polygons, p1, p2);
   }
 
-  fragments = polygonsToFragments(polygons);
+  state.fragments = polygonsToFragments(polygons);
 
   // Create SVG elements if using SVG
   if (useSvg.value) {
@@ -126,17 +131,21 @@ function createSvgElements(): void {
 
   // Clear existing SVG elements
   clearSvg(svgContainerRef.value);
-  svgPolygons = [];
+  state.svgPolygons = [];
 
   // Create new SVG elements
-  fragments.forEach((fragment) => {
-    const polygon = createSvgFragment(fragment, scale, squareCenter);
+  state.fragments.forEach((fragment) => {
+    const polygon = createSvgFragment(
+      fragment,
+      state.scale,
+      state.squareCenter
+    );
 
     // Setting additional attributes for Canvas compatibility
     polygon.setAttribute("vector-effect", "non-scaling-stroke");
 
     svgContainerRef.value?.appendChild(polygon);
-    svgPolygons.push(polygon);
+    state.svgPolygons.push(polygon);
   });
 }
 
@@ -144,9 +153,14 @@ function createSvgElements(): void {
  * Updates SVG elements with current scale
  */
 function updateSvgElements(): void {
-  fragments.forEach((fragment, index) => {
-    if (index < svgPolygons.length) {
-      updateSvgFragment(svgPolygons[index], fragment, scale, squareCenter);
+  state.fragments.forEach((fragment, index) => {
+    if (index < state.svgPolygons.length) {
+      updateSvgFragment(
+        state.svgPolygons[index],
+        fragment,
+        state.scale,
+        state.squareCenter
+      );
     }
   });
 }
@@ -162,25 +176,25 @@ function resizeCanvas(): void {
   if (!container) return;
 
   // Set canvas and svg dimensions to match container
-  canvasWidth = container.clientWidth;
-  canvasHeight = container.clientHeight;
+  state.canvasWidth = container.clientWidth;
+  state.canvasHeight = container.clientHeight;
 
-  canvasRef.value.width = canvasWidth;
-  canvasRef.value.height = canvasHeight;
+  canvasRef.value.width = state.canvasWidth;
+  canvasRef.value.height = state.canvasHeight;
   svgContainerRef.value.setAttribute("width", "100%");
   svgContainerRef.value.setAttribute("height", "100%");
   svgContainerRef.value.setAttribute(
     "viewBox",
-    `0 0 ${canvasWidth} ${canvasHeight}`
+    `0 0 ${state.canvasWidth} ${state.canvasHeight}`
   );
 
-  const minDimension = Math.min(canvasWidth, canvasHeight);
-  innerSquareSize = minDimension / 4;
-  offsetX = (canvasWidth - innerSquareSize) / 2;
-  offsetY = (canvasHeight - innerSquareSize) / 2;
-  squareCenter = {
-    x: offsetX + innerSquareSize / 2,
-    y: offsetY + innerSquareSize / 2,
+  const minDimension = Math.min(state.canvasWidth, state.canvasHeight);
+  state.innerSquareSize = minDimension / 4;
+  state.offsetX = (state.canvasWidth - state.innerSquareSize) / 2;
+  state.offsetY = (state.canvasHeight - state.innerSquareSize) / 2;
+  state.squareCenter = {
+    x: state.offsetX + state.innerSquareSize / 2,
+    y: state.offsetY + state.innerSquareSize / 2,
   };
 
   createSubdivision();
@@ -190,35 +204,37 @@ function resizeCanvas(): void {
  * Main animation loop.
  */
 function animate(): void {
-  animationId = requestAnimationFrame(animate);
+  state.animationId = requestAnimationFrame(animate);
 
-  if (growing) {
-    scale += SPEED;
-    if (scale >= MAX_SCALE) {
-      scale = MAX_SCALE;
-      growing = false;
+  if (state.growing) {
+    state.scale += SPEED;
+    if (state.scale >= MAX_SCALE) {
+      state.scale = MAX_SCALE;
+      state.growing = false;
     }
   } else {
-    scale -= SPEED;
-    if (scale <= 1.0) {
-      scale = 1.0;
-      growing = true;
-      if (!subdivisionGenerated) {
+    state.scale -= SPEED;
+    if (state.scale <= 1.0) {
+      state.scale = 1.0;
+      state.growing = true;
+      if (!state.subdivisionGenerated) {
         createSubdivision();
-        subdivisionGenerated = true;
+        state.subdivisionGenerated = true;
       }
     }
   }
 
-  if (scale > 1.0) {
-    subdivisionGenerated = false;
+  if (state.scale > 1.0) {
+    state.subdivisionGenerated = false;
   }
 
   if (useSvg.value) {
     updateSvgElements();
-  } else if (ctx) {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    fragments.forEach((frag) => drawFragment(ctx!, frag, scale, squareCenter));
+  } else if (state.ctx) {
+    state.ctx.clearRect(0, 0, state.canvasWidth, state.canvasHeight);
+    state.fragments.forEach((frag) =>
+      drawFragment(state.ctx!, frag, state.scale, state.squareCenter)
+    );
   }
 }
 
@@ -233,7 +249,7 @@ function handleRenderModeChange(newValue: boolean) {
 // Lifecycle hooks
 onMounted(() => {
   if (canvasRef.value) {
-    ctx = canvasRef.value.getContext("2d");
+    state.ctx = canvasRef.value.getContext("2d");
   }
 
   window.addEventListener("resize", resizeCanvas);
@@ -243,8 +259,8 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener("resize", resizeCanvas);
-  if (animationId !== null) {
-    cancelAnimationFrame(animationId);
+  if (state.animationId !== null) {
+    cancelAnimationFrame(state.animationId);
   }
 });
 

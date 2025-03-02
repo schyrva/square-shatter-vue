@@ -11,5 +11,5 @@ import SquareShatterComponent from "./SquareShatter.vue";
 </template>
 
 <style>
-/* Copy styles from the original component if needed here */
+/* No styles needed here as they're in the main component */
 </style>

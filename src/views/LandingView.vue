@@ -12,6 +12,7 @@ import "../styles/landing/style.scss";
             <div class="top-bar">
               <a href="#top" class="top-bar__logo-link">
                 <img
+                  v-once
                   src="/src/assets/landing/images/logo.png"
                   alt="MYBIKE logo"
                   class="top-bar__logo"
