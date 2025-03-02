@@ -2,6 +2,7 @@
 import { useRoute } from "vue-router";
 import { computed } from "vue";
 import AppHeader from "./components/layout/AppHeader.vue";
+import AppFooter from "./components/layout/AppFooter.vue";
 import CartDialog from "./components/cart/CartDialog.vue";
 
 const route = useRoute();
@@ -17,7 +18,7 @@ const needsScroll = computed(() => {
 </script>
 
 <template>
-  <!-- Новий загальний хедер для всіх сторінок -->
+  <!-- Загальний хедер для всіх сторінок -->
   <AppHeader />
 
   <main
@@ -30,6 +31,9 @@ const needsScroll = computed(() => {
     <router-view />
   </main>
 
+  <!-- Загальний футер для всіх сторінок (окрім Landing, яка має власний) -->
+  <AppFooter v-if="route.name !== 'landing'" />
+
   <!-- Діалог кошика для всіх сторінок -->
   <CartDialog />
 </template>
@@ -41,6 +45,8 @@ main {
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Спільні стилі для сторінок, що потребують прокрутки */
@@ -50,8 +56,10 @@ main {
 
 .landing-main {
   padding-top: 60px; /* Залишаємо відступ для хедера */
-  height: 100vh;
+  min-height: 100vh; /* Змінюємо з height на min-height для кращої адаптивності */
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .animation-main {
@@ -60,5 +68,12 @@ main {
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #f9fafc;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Стиль для компонента router-view, щоб він розширювався на всю доступну висоту */
+main > :first-child:not(footer) {
+  flex: 1;
 }
 </style>

@@ -181,6 +181,7 @@ function resetFilters() {
   max-width: 1400px;
   margin: 0 auto;
   min-height: 100%;
+  margin-bottom: 2rem;
 }
 
 .catalog-header {
@@ -213,6 +214,6 @@ function resetFilters() {
 }
 
 .results-container {
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
 }
 </style>

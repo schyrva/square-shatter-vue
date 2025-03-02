@@ -77,6 +77,7 @@ const { useSvg, toggleLabel } = useRenderMode();
   overflow-y: auto;
   overflow-x: hidden;
   perspective: 1000px;
+  margin-bottom: 2rem;
 }
 
 .background-decoration {
@@ -97,6 +98,7 @@ const { useSvg, toggleLabel } = useRenderMode();
   flex-direction: column;
   padding: 1rem;
   z-index: 1;
+  flex: 1;
 }
 
 .animation-header {
@@ -167,7 +169,7 @@ const { useSvg, toggleLabel } = useRenderMode();
 .animation-info {
   display: flex;
   gap: 1.5rem;
-  margin: 2rem 0;
+  margin: 2rem 0 3rem;
   flex-wrap: wrap;
 }
 
