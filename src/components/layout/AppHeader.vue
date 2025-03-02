@@ -29,31 +29,33 @@ function closeMenu() {
 
 <template>
   <header class="app-header" :class="{ 'landing-page': isLandingPage }">
-    <div class="logo">
-      <router-link to="/" class="logo-link">TestTask</router-link>
-    </div>
+    <div class="header-content">
+      <div class="logo">
+        <router-link to="/" class="logo-link">TestTask</router-link>
+      </div>
 
-    <!-- Мобільне бургер-меню -->
-    <div class="burger-menu">
-      <q-btn
-        flat
-        round
-        dense
-        :icon="isMenuOpen ? 'close' : 'menu'"
-        class="burger-button"
-        @click="toggleMenu"
-      />
-    </div>
+      <!-- Навігаційне меню -->
+      <nav class="main-nav" :class="{ 'menu-open': isMenuOpen }">
+        <router-link to="/" @click="closeMenu">Animation</router-link>
+        <router-link to="/landing" @click="closeMenu">Landing</router-link>
+        <router-link to="/catalog" @click="closeMenu">Catalog</router-link>
+      </nav>
 
-    <!-- Навігаційне меню -->
-    <nav class="main-nav" :class="{ 'menu-open': isMenuOpen }">
-      <router-link to="/" @click="closeMenu">Animation</router-link>
-      <router-link to="/landing" @click="closeMenu">Landing</router-link>
-      <router-link to="/catalog" @click="closeMenu">Catalog</router-link>
-    </nav>
+      <div class="cart-container">
+        <CartIcon v-if="showCart" />
+      </div>
 
-    <div class="cart-container">
-      <CartIcon v-if="showCart" />
+      <!-- Мобільне бургер-меню -->
+      <div class="burger-menu">
+        <q-btn
+          flat
+          round
+          dense
+          :icon="isMenuOpen ? 'close' : 'menu'"
+          class="burger-button"
+          @click="toggleMenu"
+        />
+      </div>
     </div>
 
     <!-- Overlay для закриття меню при кліку зовні -->
@@ -70,13 +72,19 @@ function closeMenu() {
   background-color: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   z-index: 100;
-  padding: var(--spacing-sm) var(--spacing-md);
   box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Спеціальні стилі для сторінки landing */
@@ -150,8 +158,8 @@ function closeMenu() {
 
 /* Стилі для мобільних екранів */
 @media (max-width: 768px) {
-  .app-header {
-    padding: var(--spacing-sm);
+  .header-content {
+    padding: 0.5rem 1rem;
   }
 
   .logo {
@@ -240,6 +248,12 @@ function closeMenu() {
     to {
       opacity: 1;
     }
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: 0.5rem 0.8rem;
   }
 }
 </style>

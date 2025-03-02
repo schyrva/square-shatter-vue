@@ -68,6 +68,9 @@ const { useSvg, toggleLabel } = useRenderMode();
 <style scoped>
 .animation-view {
   width: 100%;
+  padding: 1rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -83,17 +86,14 @@ const { useSvg, toggleLabel } = useRenderMode();
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
-  opacity: 0.1;
+  background-color: transparent;
   z-index: -1;
 }
 
 .content-wrapper {
   width: 100%;
-  max-width: 1200px;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
   z-index: 1;
   flex: 1;
 }
