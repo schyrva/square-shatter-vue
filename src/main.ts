@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
+import { createPinia } from "pinia";
 
 // Import base styles
 import "./styles/base.css";
@@ -13,6 +14,9 @@ import "quasar/dist/quasar.css";
 
 // Create app instance
 const app = createApp(App);
+
+// Initialize Pinia
+const pinia = createPinia();
 
 // Global error handler
 app.config.errorHandler = (err, instance, info) => {
@@ -27,9 +31,13 @@ app.config.errorHandler = (err, instance, info) => {
 
 // Register plugins
 app.use(router);
+app.use(pinia);
 app.use(Quasar, {
   components: QuasarComponents,
-  plugins: {},
+  plugins: {
+    Notify: {},
+    Dialog: {},
+  },
 });
 
 // Mount the app

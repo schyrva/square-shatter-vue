@@ -1,7 +1,18 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
+import CartIcon from "./components/cart/CartIcon.vue";
+import { computed } from "vue";
 
 const route = useRoute();
+
+const showCart = computed(() => {
+  return route.name !== "landing" && route.name !== "catalog";
+});
+
+// Визначаємо, чи потрібен скрол на основі поточного маршруту
+const needsScroll = computed(() => {
+  return route.name === "landing" || route.name === "catalog";
+});
 </script>
 
 <template>
@@ -11,9 +22,15 @@ const route = useRoute();
       <router-link to="/landing">Landing</router-link>
       <router-link to="/catalog">Catalog</router-link>
     </nav>
+    <CartIcon v-if="showCart" />
   </header>
 
-  <main :class="{ 'landing-main': route.name === 'landing' }">
+  <main
+    :class="{
+      'scrollable-main': needsScroll,
+      'landing-main': route.name === 'landing',
+    }"
+  >
     <router-view />
   </main>
 </template>
@@ -28,6 +45,9 @@ header {
   z-index: 100;
   padding: var(--spacing-sm) var(--spacing-md);
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 nav {
@@ -59,6 +79,11 @@ main {
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
+}
+
+/* Спільні стилі для сторінок, що потребують прокрутки */
+.scrollable-main {
+  overflow: auto;
 }
 
 .landing-main {
