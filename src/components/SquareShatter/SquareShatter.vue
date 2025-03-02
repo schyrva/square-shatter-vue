@@ -20,11 +20,11 @@ import {
   updateSvgFragment,
   clearSvg,
 } from "../../utils/svg";
-import Toggle from "../ui/Toggle.vue";
-import useRenderMode from "../../composables/useRenderMode";
 
-// Using composable for render mode management
-const { useSvg, toggleLabel, toggleRenderMode } = useRenderMode();
+// Props
+const props = defineProps<{
+  useSvg: boolean;
+}>();
 
 // Refs
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -118,7 +118,7 @@ function createSubdivision(): void {
   state.fragments = polygonsToFragments(polygons);
 
   // Create SVG elements if using SVG
-  if (useSvg.value) {
+  if (props.useSvg) {
     createSvgElements();
   }
 }
@@ -228,7 +228,7 @@ function animate(): void {
     state.subdivisionGenerated = false;
   }
 
-  if (useSvg.value) {
+  if (props.useSvg) {
     updateSvgElements();
   } else if (state.ctx) {
     state.ctx.clearRect(0, 0, state.canvasWidth, state.canvasHeight);
@@ -264,24 +264,21 @@ onUnmounted(() => {
   }
 });
 
-// Watch for changes to useSvg
-watch(useSvg, handleRenderModeChange);
+// Watch for changes to useSvg from props
+watch(() => props.useSvg, handleRenderModeChange);
 </script>
 
 <template>
   <div class="square-shatter-container">
-    <div class="render-toggle">
-      <Toggle v-model="useSvg" :label="toggleLabel" />
-    </div>
     <canvas
       ref="canvasRef"
       id="canvas"
-      :style="{ display: useSvg ? 'none' : 'block' }"
+      :style="{ display: props.useSvg ? 'none' : 'block' }"
     ></canvas>
     <svg
       ref="svgContainerRef"
       id="svg-container"
-      :style="{ display: useSvg ? 'block' : 'none' }"
+      :style="{ display: props.useSvg ? 'block' : 'none' }"
     ></svg>
   </div>
 </template>
@@ -301,16 +298,5 @@ canvas,
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-.render-toggle {
-  position: absolute;
-  top: clamp(10px, 2vw, 20px);
-  right: clamp(10px, 2vw, 20px);
-  z-index: 1000;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
 }
 </style>

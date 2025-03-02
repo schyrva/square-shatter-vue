@@ -2,12 +2,14 @@
 import SquareShatterComponent from "./SquareShatter.vue";
 
 // Re-exporting component for easier imports
-// Although the component doesn't have explicit props, we need to proxy all attributes
-// to ensure proper functioning
+// We need to define props and proxy them along with other attributes
+const props = defineProps<{
+  useSvg: boolean;
+}>();
 </script>
 
 <template>
-  <SquareShatterComponent v-bind="$attrs" />
+  <SquareShatterComponent v-bind="$attrs" :use-svg="props.useSvg" />
 </template>
 
 <style>
