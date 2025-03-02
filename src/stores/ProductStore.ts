@@ -25,7 +25,7 @@ export const useProductStore = defineStore("products", () => {
       image: "/src/assets/landing/images/products/sporty-4.png",
       category: "mountain",
       available: true,
-      rating: 4.8,
+      rating: 4,
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ export const useProductStore = defineStore("products", () => {
       image: "/src/assets/landing/images/products/ride-in-town-st.png",
       category: "urban",
       available: true,
-      rating: 4.5,
+      rating: 5,
     },
     {
       id: 3,
@@ -47,7 +47,7 @@ export const useProductStore = defineStore("products", () => {
       image: "/src/assets/landing/images/products/agile-ride-3.png",
       category: "road",
       available: true,
-      rating: 4.7,
+      rating: 1,
     },
     {
       id: 4,
@@ -58,7 +58,7 @@ export const useProductStore = defineStore("products", () => {
       image: "/src/assets/landing/images/products/sporty-4.png", // Reusing existing image
       category: "mountain",
       available: true,
-      rating: 4.6,
+      rating: 4,
     },
     {
       id: 5,
@@ -69,7 +69,7 @@ export const useProductStore = defineStore("products", () => {
       image: "/src/assets/landing/images/products/ride-in-town-st.png", // Reusing existing image
       category: "urban",
       available: true,
-      rating: 4.3,
+      rating: 3,
     },
     {
       id: 6,
@@ -80,7 +80,7 @@ export const useProductStore = defineStore("products", () => {
       image: "/src/assets/landing/images/products/agile-ride-3.png", // Reusing existing image
       category: "road",
       available: true,
-      rating: 4.9,
+      rating: 2,
     },
   ]);
 

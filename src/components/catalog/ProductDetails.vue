@@ -40,6 +40,10 @@ function addToCart() {
     dialogVisible.value = false;
   }
 }
+
+function closeDialog() {
+  dialogVisible.value = false;
+}
 </script>
 
 <template>
@@ -48,7 +52,7 @@ function addToCart() {
       <q-card-section class="row items-center">
         <div class="text-h6">{{ product.name }}</div>
         <q-space />
-        <q-btn icon="close" flat round dense v-close-popup />
+        <q-btn icon="close" flat round dense @click="closeDialog" />
       </q-card-section>
 
       <q-separator />
