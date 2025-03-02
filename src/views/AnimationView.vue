@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
 import SquareShatter from "../components/SquareShatter/index.vue";
 import Toggle from "../components/ui/Toggle.vue";
 import useRenderMode from "../composables/useRenderMode";
@@ -74,8 +73,6 @@ const { useSvg, toggleLabel } = useRenderMode();
   flex-direction: column;
   align-items: center;
   position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
   perspective: 1000px;
   margin-bottom: 2rem;
 }

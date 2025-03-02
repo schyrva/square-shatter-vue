@@ -22,14 +22,29 @@
   box-sizing: border-box;
 }
 
+/* Global scroll behavior - застосовується до всього додатку */
+html,
+body,
+#app,
+main,
+.animation-view,
+.catalog-view,
+.page__body {
+  /* Заборона горизонтальної прокрутки, дозвіл вертикальної для всіх основних контейнерів */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Особливі контейнери, які потребують повного обмеження прокрутки */
+.square-shatter-container {
+  overflow: hidden !important;
+}
+
 /* Base tag styles */
 html,
 body {
   margin: 0;
   padding: 0;
-  /* Разрешаем прокрутку если контент больше экрана */
-  overflow-x: hidden;
-  overflow-y: auto;
   height: 100%;
   width: 100%;
 }
@@ -44,7 +59,6 @@ body {
 #app {
   width: 100%;
   height: 100%;
-  overflow: hidden;
   margin: 0 auto;
   padding: 0;
 }

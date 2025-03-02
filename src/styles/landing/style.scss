@@ -5,10 +5,7 @@
 html,
 body,
 #app {
-  overflow: auto;
   height: auto;
 }
 
-.page__body {
-  overflow: visible;
-}
+// Правила прокрутки тепер централізовані в base.css

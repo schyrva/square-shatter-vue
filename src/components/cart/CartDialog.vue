@@ -186,4 +186,10 @@ function checkout() {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   padding-top: 1rem;
 }
+
+.cart-items {
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 </style>
