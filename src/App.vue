@@ -2,6 +2,7 @@
 import { useRoute } from "vue-router";
 import { computed } from "vue";
 import AppHeader from "./components/layout/AppHeader.vue";
+import CartDialog from "./components/cart/CartDialog.vue";
 
 const route = useRoute();
 
@@ -23,6 +24,9 @@ const needsScroll = computed(() => {
   >
     <router-view />
   </main>
+
+  <!-- Діалог кошика для всіх сторінок -->
+  <CartDialog />
 </template>
 
 <style scoped>

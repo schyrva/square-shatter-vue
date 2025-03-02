@@ -11,6 +11,11 @@ const showCart = computed(() => {
   return true; // Тепер показуємо кошик завжди
 });
 
+// Перевіряємо, чи зараз відображається сторінка landing
+const isLandingPage = computed(() => {
+  return route.path === "/landing";
+});
+
 // Функція для перемикання стану меню
 function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value;
@@ -23,7 +28,7 @@ function closeMenu() {
 </script>
 
 <template>
-  <header class="app-header">
+  <header class="app-header" :class="{ 'landing-page': isLandingPage }">
     <div class="logo">
       <router-link to="/" class="logo-link">TestTask</router-link>
     </div>
@@ -72,6 +77,21 @@ function closeMenu() {
   align-items: center;
   flex-wrap: wrap;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Спеціальні стилі для сторінки landing */
+.app-header.landing-page {
+  /* Налаштування для запобігання перекриттю з меню landing page */
+  z-index: 5; /* Нижчий z-index, ніж у меню landing page (яке має z-index: 10) */
+
+  /* Опціонально: додаткові стилі для кращої видимості на landing page */
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* На landing page, при відкритому його власному меню, ховаємо глобальний header */
+.app-header.landing-page:has(body:has(.page__menu:target)) {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .logo {
