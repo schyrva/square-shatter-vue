@@ -4,7 +4,6 @@ import { useProductStore } from "../stores/ProductStore";
 import ProductCard from "../components/catalog/ProductCard.vue";
 import ProductDetails from "../components/catalog/ProductDetails.vue";
 import CartDialog from "../components/cart/CartDialog.vue";
-import CartIcon from "../components/cart/CartIcon.vue";
 import { useCartStore } from "../stores/CartStore";
 import type { Product } from "../stores/ProductStore";
 
@@ -78,7 +77,6 @@ function resetFilters() {
   <div class="catalog-view">
     <div class="catalog-header">
       <h1>Product Catalog</h1>
-      <CartIcon />
     </div>
 
     <!-- Filters Section -->
@@ -187,7 +185,7 @@ function resetFilters() {
 
 .catalog-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
 }
@@ -197,7 +195,7 @@ function resetFilters() {
   border-radius: 8px;
   margin-bottom: 2rem;
   position: sticky;
-  top: 0;
+  top: 70px; /* Відступ для хедера */
   z-index: 1;
 }
 
