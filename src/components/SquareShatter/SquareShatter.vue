@@ -289,6 +289,8 @@ watch(() => props.useSvg, handleRenderModeChange);
   width: 100%;
   height: 100%;
   overflow: hidden;
+  border-radius: var(--radius-lg);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 canvas,

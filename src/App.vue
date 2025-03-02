@@ -8,7 +8,11 @@ const route = useRoute();
 
 // Визначаємо, чи потрібен скрол на основі поточного маршруту
 const needsScroll = computed(() => {
-  return route.name === "landing" || route.name === "catalog";
+  return (
+    route.name === "landing" ||
+    route.name === "catalog" ||
+    route.name === "animation"
+  );
 });
 </script>
 
@@ -20,6 +24,7 @@ const needsScroll = computed(() => {
     :class="{
       'scrollable-main': needsScroll,
       'landing-main': route.name === 'landing',
+      'animation-main': route.name === 'animation',
     }"
   >
     <router-view />
@@ -32,7 +37,7 @@ const needsScroll = computed(() => {
 <style scoped>
 main {
   padding-top: 60px;
-  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
@@ -47,5 +52,13 @@ main {
   padding-top: 60px; /* Залишаємо відступ для хедера */
   height: 100vh;
   overflow: auto;
+}
+
+.animation-main {
+  padding-top: 60px;
+  min-height: calc(100vh - 60px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #f9fafc;
 }
 </style>

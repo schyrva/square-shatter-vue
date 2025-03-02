@@ -27,7 +27,9 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  /* Разрешаем прокрутку если контент больше экрана */
+  overflow-x: hidden;
+  overflow-y: auto;
   height: 100%;
   width: 100%;
 }
