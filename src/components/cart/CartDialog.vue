@@ -38,7 +38,13 @@ function checkout() {
 </script>
 
 <template>
-  <q-dialog v-model="visible" maximized position="right" persistent>
+  <q-dialog
+    v-model="visible"
+    :maximized="$q.screen.lt.sm"
+    position="right"
+    persistent
+    full-width
+  >
     <q-card class="cart-dialog">
       <q-card-section class="row items-center q-pb-none">
         <div class="text-h6">Your Cart</div>
@@ -191,5 +197,68 @@ function checkout() {
   max-height: 60vh;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+/* Стилі для мобільних екранів */
+@media (max-width: 600px) {
+  .cart-dialog {
+    max-width: 100%;
+    width: 100vw;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .q-card__section {
+    padding: 16px;
+  }
+
+  .quantity-controls {
+    flex-wrap: nowrap;
+  }
+
+  /* Адаптивний вигляд товарів у корзині */
+  :deep(.q-item) {
+    flex-wrap: wrap;
+    padding: 12px;
+  }
+
+  :deep(.q-item__section--avatar) {
+    min-width: 80px;
+    padding-right: 12px;
+  }
+
+  :deep(.q-item__section--side) {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  :deep(.q-item__section--main) {
+    padding: 8px 0;
+  }
+
+  /* Фіксування футера внизу картки при скролі */
+  :deep(.cart-summary) {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    z-index: 2;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Дуже маленькі екрани */
+@media (max-width: 400px) {
+  :deep(.q-item) {
+    padding: 8px;
+  }
+
+  :deep(.q-item__section--avatar) {
+    min-width: 60px;
+  }
+
+  :deep(.q-img) {
+    width: 60px !important;
+    height: 60px !important;
+  }
 }
 </style>
