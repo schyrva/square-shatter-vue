@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, onUnmounted, watch } from 'vue';
-import type { Point, Fragment, Polygon } from '../../types/types';
-import { SPEED, MAX_SCALE, AREA_THRESHOLD, MIN_LINES, MAX_LINES } from '../../constants/config';
+import type { Point, Fragment, Polygon } from '../../types';
+import { SPEED, MAX_SCALE, AREA_THRESHOLD, MIN_LINES, MAX_LINES } from '../../constants';
 import { cutPolygonWithLine, computeCentroid, polygonArea } from '../../utils/geometry';
 import { generateRandomLines, getRandomColor } from '../../utils/random';
 import { drawFragment } from '../../utils/canvas';

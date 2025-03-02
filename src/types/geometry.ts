@@ -1,3 +1,7 @@
+/**
+ * Geometry type definitions
+ */
+
 // Represents a 2D point with x and y coordinates
 export interface Point {
   x: number;
@@ -9,11 +13,3 @@ export type Polygon = Point[];
 
 // Represents a line segment defined by two points
 export type Line = [Point, Point];
-
-// Represents a fragment of the shattered square
-export interface Fragment {
-  vertices: Point[];
-  centroid: Point;
-  localOffsets: Point[];
-  color: string;
-}

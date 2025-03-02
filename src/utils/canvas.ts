@@ -1,5 +1,5 @@
-import type { Fragment, Point } from '../types/types';
-import { STROKE_STYLE, LINE_WIDTH } from '../constants/config';
+import type { Fragment, Point } from '../types';
+import { STROKE_STYLE, LINE_WIDTH } from '../constants';
 
 /**
  * Draws a single fragment with scaling animation.

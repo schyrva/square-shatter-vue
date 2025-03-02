@@ -1,5 +1,5 @@
-import type { Point, Line } from '../types/types';
-import { MIN_RGB, COLOR_RANGE } from '../constants/config';
+import type { Point, Line } from '../types';
+import { MIN_RGB, COLOR_RANGE } from '../constants';
 
 /**
  * Generates a random point on the square boundary.
