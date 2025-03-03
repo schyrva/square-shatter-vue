@@ -16,7 +16,7 @@
   }
 
   &--phone {
-    background-image: url(/src/assets/landing/images/icons/icon-phone.svg);
+    background-image: url(/assets/landing/images/icons/icon-phone.svg);
     display: flex;
     align-items: center;
 
@@ -40,14 +40,14 @@
   }
 
   &--menu {
-    background-image: url(/src/assets/landing/images/icons/icon-burger-menu.svg);
+    background-image: url(/assets/landing/images/icons/icon-burger-menu.svg);
 
     &:hover {
-      background-image: url(/src/assets/landing/images/icons/icon-burger-menu-hover.svg);
+      background-image: url(/assets/landing/images/icons/icon-burger-menu-hover.svg);
     }
   }
 
   &--close {
-    background-image: url(/src/assets/landing/images/icons/icon-close.svg);
+    background-image: url(/assets/landing/images/icons/icon-close.svg);
   }
 }
