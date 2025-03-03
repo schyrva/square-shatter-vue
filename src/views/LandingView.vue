@@ -13,7 +13,7 @@ import '../styles/landing/style.scss';
               <a href="#top" class="top-bar__logo-link">
                 <img
                   v-once
-                  src="/src/assets/landing/images/logo.png"
+                  src="/assets/landing/images/logo.png"
                   alt="MYBIKE logo"
                   class="top-bar__logo"
                 />
@@ -35,7 +35,7 @@ import '../styles/landing/style.scss';
           <div class="top-bar menu__top">
             <a href="#top" class="top-bar__logo-link">
               <img
-                src="/src/assets/landing/images/logo-menu.png"
+                src="/assets/landing/images/logo-menu.png"
                 alt="MYBIKE logo"
                 class="top-bar__logo"
               />
@@ -85,7 +85,7 @@ import '../styles/landing/style.scss';
               <div class="compare-bikes__products">
                 <article class="product compare-bikes__product">
                   <img
-                    src="/src/assets/landing/images/products/sporty-4.png"
+                    src="/assets/landing/images/products/sporty-4.png"
                     alt="Sporty 4"
                     class="product__photo"
                   />
@@ -97,7 +97,7 @@ import '../styles/landing/style.scss';
                 </article>
                 <article class="product compare-bikes__product">
                   <img
-                    src="/src/assets/landing/images/products/ride-in-town-st.png"
+                    src="/assets/landing/images/products/ride-in-town-st.png"
                     alt="Ride in town ST"
                     class="product__photo"
                   />
@@ -110,7 +110,7 @@ import '../styles/landing/style.scss';
                 </article>
                 <article class="product compare-bikes__product">
                   <img
-                    src="/src/assets/landing/images/products/agile-ride-3.png"
+                    src="/assets/landing/images/products/agile-ride-3.png"
                     alt="Agile ride 3"
                     class="product__photo"
                   />
@@ -130,7 +130,7 @@ import '../styles/landing/style.scss';
                   <div class="detail__photos">
                     <a href="#" class="detail__link detail__link--wide">
                       <img
-                        src="/src/assets/landing/images/details/auto-unlock-wide.png"
+                        src="/assets/landing/images/details/auto-unlock-wide.png"
                         alt="Auto Unlock"
                         class="detail__photo"
                       />
@@ -138,7 +138,7 @@ import '../styles/landing/style.scss';
 
                     <a href="#" class="detail__link detail__link--square">
                       <img
-                        src="/src/assets/landing/images/details/auto-unlock-square.png"
+                        src="/assets/landing/images/details/auto-unlock-square.png"
                         alt="Auto Unlock"
                         class="detail__photo"
                       />
@@ -155,7 +155,7 @@ import '../styles/landing/style.scss';
                   <div class="detail__photos">
                     <a href="#" class="detail__link detail__link--wide">
                       <img
-                        src="/src/assets/landing/images/details/range-&-ntegrated-lights-wide.png"
+                        src="/assets/landing/images/details/range-&-ntegrated-lights-wide.png"
                         alt="Range & Integrated lights"
                         class="detail__photo"
                       />
@@ -163,7 +163,7 @@ import '../styles/landing/style.scss';
 
                     <a href="#" class="detail__link detail__link--square">
                       <img
-                        src="/src/assets/landing/images/details/range-&-ntegrated-lights-square.png"
+                        src="/assets/landing/images/details/range-&-ntegrated-lights-square.png"
                         alt="Range & Integrated lights"
                         class="detail__photo"
                       />
@@ -180,7 +180,7 @@ import '../styles/landing/style.scss';
                   <div class="detail__photos">
                     <a href="#" class="detail__link detail__link--square">
                       <img
-                        src="/src/assets/landing/images/details/hydraulic-disc-brakes-&-ightweight-square.png"
+                        src="/assets/landing/images/details/hydraulic-disc-brakes-&-ightweight-square.png"
                         alt="Hydraulic disc brakes & Lightweight"
                         class="detail__photo"
                       />
@@ -188,7 +188,7 @@ import '../styles/landing/style.scss';
 
                     <a href="#" class="detail__link detail__link--wide">
                       <img
-                        src="/src/assets/landing/images/details/hydraulic-disc-brakes-&-ightweight-wide.png"
+                        src="/assets/landing/images/details/hydraulic-disc-brakes-&-ightweight-wide.png"
                         alt="Hydraulic disc brakes & Lightweight"
                         class="detail__photo"
                       />
@@ -276,11 +276,7 @@ import '../styles/landing/style.scss';
 
       <footer class="footer">
         <div class="footer__wrapper">
-          <img
-            src="/src/assets/landing/images/footer.png"
-            alt="page footer"
-            class="footer__image"
-          />
+          <img src="/assets/landing/images/footer.png" alt="page footer" class="footer__image" />
         </div>
       </footer>
     </div>
