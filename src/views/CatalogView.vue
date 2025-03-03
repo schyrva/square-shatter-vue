@@ -81,7 +81,16 @@ function resetFilters() {
     <div class="filters-container q-pa-md">
       <div class="row q-col-gutter-md">
         <div class="col-12 col-sm-6 col-md-3">
-          <q-input v-model="searchQuery" outlined dense placeholder="Search products..." clearable>
+          <q-input
+            :model-value="searchQuery"
+            outlined
+            dense
+            placeholder="Search products..."
+            clearable
+            @update:model-value="
+              (val) => (searchQuery = val === null || val === undefined ? '' : String(val))
+            "
+          >
             <template v-slot:append>
               <q-icon name="search" />
             </template>

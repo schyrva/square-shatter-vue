@@ -80,21 +80,22 @@ function closeDialog() {
           </div>
 
           <q-chip color="primary" text-color="white" class="q-mb-md text-capitalize">
-            {{ props.product.category }}
+            {{ props.product?.category }}
           </q-chip>
 
-          <p class="text-body1">{{ props.product.description }}</p>
+          <p class="text-body1">{{ props.product?.description }}</p>
 
           <div class="row items-center q-mt-lg">
             <div class="col-6">
               <q-input
-                v-model.number="quantity"
+                :model-value="quantity"
                 type="number"
                 label="Quantity"
                 dense
                 :min="1"
                 :max="99"
                 style="max-width: 120px"
+                @update:model-value="(val) => (quantity = typeof val === 'number' ? val : 1)"
               >
                 <template v-slot:prepend>
                   <q-btn icon="remove" flat dense @click="quantity = Math.max(1, quantity - 1)" />
