@@ -5,11 +5,11 @@ import { useQuasar } from 'quasar';
 import CartItem from './CartItem.vue';
 import CartSummary from './CartSummary.vue';
 import EmptyCart from './EmptyCart.vue';
-import { useNotification } from '../../composables/useNotification';
+import { useNotificationStore } from '../../stores/NotificationStore';
 
 const $q = useQuasar();
 const cartStore = useCartStore();
-const { showNotification } = useNotification();
+const notificationStore = useNotificationStore();
 const isProcessing = ref(false);
 
 const visible = computed({
@@ -27,11 +27,11 @@ async function checkout() {
 
     // Clear cart after successful checkout
     cartStore.clearCart();
-    showNotification('Checkout completed successfully!', 'positive');
+    notificationStore.showNotification('Checkout completed successfully!', 'positive');
     cartStore.closeCart();
   } catch (error) {
     console.error('Checkout error:', error);
-    showNotification('Failed to process checkout. Please try again.', 'negative');
+    notificationStore.showNotification('Failed to process checkout. Please try again.', 'negative');
   } finally {
     isProcessing.value = false;
   }

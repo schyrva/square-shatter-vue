@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue';
 import { useCartStore } from '../../stores/CartStore';
 import type { Product } from '../../types';
-import { useNotification } from '../../composables/useNotification';
+import { useNotificationStore } from '../../stores/NotificationStore';
 
 const props = defineProps<{
   product: Product | null;
@@ -14,7 +14,7 @@ const emit = defineEmits<{
 }>();
 
 const cartStore = useCartStore();
-const { showNotification } = useNotification();
+const notificationStore = useNotificationStore();
 const quantity = ref(1);
 
 const dialogVisible = computed({
@@ -31,7 +31,11 @@ const dialogVisible = computed({
 function addToCart() {
   if (props.product) {
     cartStore.addToCart(props.product.id, quantity.value);
-    showNotification(`${quantity.value} ${props.product.name} added to cart`, 'positive', 2000);
+    notificationStore.showNotification(
+      `${quantity.value} ${props.product.name} added to cart`,
+      'positive',
+      2000
+    );
     dialogVisible.value = false;
   }
 }

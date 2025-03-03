@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { useCartStore } from '../../stores/CartStore';
 import type { Product } from '../../types';
-import { useNotification } from '../../composables/useNotification';
+import { useNotificationStore } from '../../stores/NotificationStore';
 
 const _props = defineProps<{
   product: Product;
 }>();
 
 const cartStore = useCartStore();
-const { showNotification } = useNotification();
+const notificationStore = useNotificationStore();
 
 function addToCart(product: Product) {
   cartStore.addToCart(product.id);
-  showNotification(`${product.name} added to cart`, 'positive', 2000);
+  notificationStore.showNotification(`${product.name} added to cart`, 'positive', 2000);
 }
 </script>
 
