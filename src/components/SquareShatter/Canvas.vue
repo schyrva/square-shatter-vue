@@ -52,11 +52,5 @@ watch(
 </template>
 
 <style scoped>
-.canvas-renderer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
+/* Styles moved to global ui-components.css */
 </style>

@@ -40,18 +40,5 @@ const { formatPrice } = useFormatPrice();
 </template>
 
 <style scoped>
-.cart-summary {
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-  padding-top: 1rem;
-}
-
-@media (max-width: 600px) {
-  .cart-summary {
-    position: sticky;
-    bottom: 0;
-    background: white;
-    z-index: 2;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  }
-}
+/* Styles moved to global ui-components.css */
 </style>

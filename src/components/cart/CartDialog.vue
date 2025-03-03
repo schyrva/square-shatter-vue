@@ -73,22 +73,5 @@ async function checkout() {
 </template>
 
 <style scoped>
-.cart-dialog {
-  width: 100%;
-  max-width: 500px;
-  height: 100%;
-}
-
-@media (max-width: 600px) {
-  .cart-dialog {
-    max-width: 100%;
-    width: 100vw;
-    margin: 0;
-    border-radius: 0;
-  }
-
-  .q-card__section {
-    padding: 16px;
-  }
-}
+/* Styles moved to global cart.css */
 </style>

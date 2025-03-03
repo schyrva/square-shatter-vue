@@ -1,0 +1,65 @@
+/* Footer Styles */
+
+.app-footer {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.author-link {
+  color: #2a3f5f;
+  font-weight: 600;
+  transition: color 0.2s ease;
+  text-decoration: none;
+  position: relative;
+}
+
+.author-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.author-link:hover {
+  color: var(--color-primary);
+}
+
+.author-link:hover::after {
+  width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .app-footer {
+    background-color: rgba(30, 41, 59, 0.8);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-content {
+    color: #cbd5e1;
+  }
+
+  .author-link {
+    color: #f1f5f9;
+  }
+}

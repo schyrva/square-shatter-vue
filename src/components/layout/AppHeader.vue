@@ -29,19 +29,19 @@ function closeMenu() {
 
 <template>
   <header class="app-header" :class="{ 'landing-page': isLandingPage }">
-    <div class="header-content">
+    <div class="header-content flex justify-between items-center">
       <div class="logo">
         <router-link to="/" class="logo-link">TestTask</router-link>
       </div>
 
       <!-- Навігаційне меню -->
-      <nav class="main-nav" :class="{ 'menu-open': isMenuOpen }">
+      <nav class="main-nav flex justify-center" :class="{ 'menu-open': isMenuOpen }">
         <router-link to="/" @click="closeMenu">Animation</router-link>
         <router-link to="/landing" @click="closeMenu">Landing</router-link>
         <router-link to="/catalog" @click="closeMenu">Catalog</router-link>
       </nav>
 
-      <div class="cart-container">
+      <div class="cart-container flex justify-end">
         <CartIcon v-if="showCart" />
       </div>
 
@@ -64,29 +64,6 @@ function closeMenu() {
 </template>
 
 <style scoped>
-.app-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  z-index: 100;
-  box-sizing: border-box;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.header-content {
-  max-width: 1400px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0.5rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
 /* Спеціальні стилі для сторінки landing */
 .app-header.landing-page {
   /* Налаштування для запобігання перекриттю з меню landing page */
@@ -100,6 +77,13 @@ function closeMenu() {
 .app-header.landing-page:has(body:has(.page__menu:target)) {
   opacity: 0;
   pointer-events: none;
+}
+
+.header-content {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
 }
 
 .logo {
@@ -116,9 +100,7 @@ function closeMenu() {
 
 .main-nav {
   flex: 2;
-  display: flex;
   gap: clamp(0.5rem, 2vw, 1.5rem);
-  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -143,8 +125,6 @@ function closeMenu() {
 
 .cart-container {
   flex: 1;
-  display: flex;
-  justify-content: flex-end;
   z-index: 101;
 }
 
@@ -249,12 +229,6 @@ function closeMenu() {
     to {
       opacity: 1;
     }
-  }
-}
-
-@media (max-width: 480px) {
-  .header-content {
-    padding: 0.5rem 0.8rem;
   }
 }
 </style>

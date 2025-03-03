@@ -10,7 +10,7 @@ const route = useRoute();
 <template>
   <AppHeader />
 
-  <main>
+  <main class="flex flex-col">
     <router-view />
   </main>
 
@@ -20,21 +20,5 @@ const route = useRoute();
 </template>
 
 <style scoped>
-main {
-  padding-top: 60px;
-  min-height: calc(100vh - 60px);
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-
-main > :first-child:not(footer) {
-  flex: 1;
-}
-
-:deep(.app-footer) {
-  margin-top: auto;
-  width: 100%;
-}
+/* Styles moved to global layout.css */
 </style>

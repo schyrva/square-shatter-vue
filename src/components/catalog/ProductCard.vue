@@ -18,9 +18,13 @@ function addToCart(product: Product) {
 
 <template>
   <q-card class="product-card">
-    <q-img :src="props.product.image" style="height: 200px; object-fit: contain" />
+    <q-img
+      :src="props.product.image"
+      class="product-image"
+      style="height: 200px; object-fit: contain"
+    />
 
-    <q-card-section>
+    <q-card-section class="product-content">
       <div class="row items-center no-wrap">
         <div class="col">
           <div class="text-h6">{{ props.product.name }}</div>
@@ -42,7 +46,7 @@ function addToCart(product: Product) {
       <p class="product-description">{{ props.product.description }}</p>
     </q-card-section>
 
-    <q-card-actions align="right">
+    <q-card-actions align="right" class="product-actions">
       <q-btn flat color="primary" label="Details" @click="$emit('view-details', props.product)" />
       <q-btn
         color="primary"
@@ -55,27 +59,5 @@ function addToCart(product: Product) {
 </template>
 
 <style scoped>
-.product-card {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-}
-
-.product-description {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  min-height: 2.8em;
-}
+/* Styles moved to global ui-components.css */
 </style>
