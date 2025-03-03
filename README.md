@@ -4,7 +4,7 @@ A modern Vue 3 application showcasing interactive animations and e-commerce func
 
 ## Demo & Repository
 
-- **Live Demo**: [Square Shatter Vue Demo](https://square-shatter-vue.vercel.app/) 
+- **Live Demo**: [Square Shatter Vue Demo](https://square-shatter-vue.vercel.app/)
 
 - **Repository**: [GitHub Repository](https://github.com/schyrva/square-shatter-vue)
 
@@ -123,3 +123,7 @@ For any inquiries or feedback, please contact:
 - **Stanislav Chyrva**
 - GitHub: [@schyrva](https://github.com/schyrva)
 - Email: [stanislav.chyrva@gmail.com](mailto:stanislav.chyrva@gmail.com)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
