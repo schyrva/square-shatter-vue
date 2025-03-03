@@ -2,9 +2,14 @@
 import { computed } from 'vue';
 import { useCartStore } from '../../stores/CartStore';
 import { useQuasar } from 'quasar';
+import CartItem from './CartItem.vue';
+import CartSummary from './CartSummary.vue';
+import EmptyCart from './EmptyCart.vue';
+import { useNotification } from '../../composables/useNotification';
 
 const $q = useQuasar();
 const cartStore = useCartStore();
+const { showNotification } = useNotification();
 
 const visible = computed({
   get: () => cartStore.isCartOpen,
@@ -13,26 +18,8 @@ const visible = computed({
   },
 });
 
-const formatPrice = (price: number) => {
-  return `$${price.toFixed(2)}`;
-};
-
 function checkout() {
-  $q.notify({
-    message: 'Checkout not implemented in this demo',
-    color: 'info',
-    position: 'top',
-    timeout: 2000,
-    actions: [
-      {
-        icon: 'close',
-        color: 'white',
-        handler: () => {
-          /* close */
-        },
-      },
-    ],
-  });
+  showNotification('Checkout not implemented in this demo', 'info');
   cartStore.closeCart();
 }
 </script>
@@ -47,74 +34,25 @@ function checkout() {
       </q-card-section>
 
       <q-card-section>
-        <div v-if="cartStore.totalItems === 0" class="empty-cart-message">
-          <q-icon name="shopping_cart" size="6rem" color="grey-5" />
-          <p>Your cart is empty</p>
-          <q-btn label="Continue Shopping" color="primary" @click="cartStore.closeCart" />
-        </div>
+        <EmptyCart v-if="cartStore.totalItems === 0" @continue-shopping="cartStore.closeCart" />
 
         <q-list v-else bordered separator>
-          <q-item v-for="item in cartStore.cartProducts" :key="item.item.productId">
-            <q-item-section avatar>
-              <q-img
-                :src="item.product?.image"
-                style="width: 80px; height: 80px; object-fit: contain"
-              />
-            </q-item-section>
-
-            <q-item-section>
-              <q-item-label>{{ item.product?.name }}</q-item-label>
-              <q-item-label caption>{{ formatPrice(item.product?.price || 0) }}</q-item-label>
-            </q-item-section>
-
-            <q-item-section side>
-              <div class="quantity-controls">
-                <q-btn
-                  flat
-                  dense
-                  round
-                  icon="remove"
-                  @click="cartStore.updateQuantity(item.item.productId, item.item.quantity - 1)"
-                />
-                <span class="quantity">{{ item.item.quantity }}</span>
-                <q-btn
-                  flat
-                  dense
-                  round
-                  icon="add"
-                  @click="cartStore.updateQuantity(item.item.productId, item.item.quantity + 1)"
-                />
-              </div>
-            </q-item-section>
-
-            <q-item-section side>
-              <q-item-label>{{ formatPrice(item.total) }}</q-item-label>
-            </q-item-section>
-
-            <q-item-section side>
-              <q-btn
-                flat
-                dense
-                round
-                color="negative"
-                icon="delete"
-                @click="cartStore.removeFromCart(item.item.productId)"
-              />
-            </q-item-section>
-          </q-item>
+          <CartItem
+            v-for="item in cartStore.cartProducts"
+            :key="item.item.productId"
+            :cart-item="item"
+            @update-quantity="cartStore.updateQuantity"
+            @remove="cartStore.removeFromCart"
+          />
         </q-list>
       </q-card-section>
 
-      <q-card-section v-if="cartStore.totalItems > 0" class="cart-summary">
-        <div class="row justify-between q-mt-md">
-          <div class="text-h6">Total:</div>
-          <div class="text-h6">{{ formatPrice(cartStore.totalPrice) }}</div>
-        </div>
-        <div class="row justify-between q-mt-lg">
-          <q-btn label="Continue Shopping" outline color="primary" @click="cartStore.closeCart" />
-          <q-btn label="Checkout" color="primary" @click="checkout" />
-        </div>
-      </q-card-section>
+      <CartSummary
+        v-if="cartStore.totalItems > 0"
+        :total-price="cartStore.totalPrice"
+        @continue-shopping="cartStore.closeCart"
+        @checkout="checkout"
+      />
     </q-card>
   </q-dialog>
 </template>
@@ -126,43 +64,6 @@ function checkout() {
   height: 100%;
 }
 
-.empty-cart-message {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 300px;
-  text-align: center;
-}
-
-.empty-cart-message p {
-  font-size: 1.2em;
-  margin: 1rem 0;
-  color: var(--color-text);
-}
-
-.quantity-controls {
-  display: flex;
-  align-items: center;
-}
-
-.quantity {
-  width: 30px;
-  text-align: center;
-}
-
-.cart-summary {
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-  padding-top: 1rem;
-}
-
-.cart-items {
-  max-height: 60vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-/* Стилі для мобільних екранів */
 @media (max-width: 600px) {
   .cart-dialog {
     max-width: 100%;
@@ -173,55 +74,6 @@ function checkout() {
 
   .q-card__section {
     padding: 16px;
-  }
-
-  .quantity-controls {
-    flex-wrap: nowrap;
-  }
-
-  /* Адаптивний вигляд товарів у корзині */
-  :deep(.q-item) {
-    flex-wrap: wrap;
-    padding: 12px;
-  }
-
-  :deep(.q-item__section--avatar) {
-    min-width: 80px;
-    padding-right: 12px;
-  }
-
-  :deep(.q-item__section--side) {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-
-  :deep(.q-item__section--main) {
-    padding: 8px 0;
-  }
-
-  /* Фіксування футера внизу картки при скролі */
-  :deep(.cart-summary) {
-    position: sticky;
-    bottom: 0;
-    background: white;
-    z-index: 2;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  }
-}
-
-/* Дуже маленькі екрани */
-@media (max-width: 400px) {
-  :deep(.q-item) {
-    padding: 8px;
-  }
-
-  :deep(.q-item__section--avatar) {
-    min-width: 60px;
-  }
-
-  :deep(.q-img) {
-    width: 60px !important;
-    height: 60px !important;
   }
 }
 </style>
