@@ -71,7 +71,3 @@ async function checkout() {
     </q-card>
   </q-dialog>
 </template>
-
-<style scoped>
-/* Styles moved to global cart.css */
-</style>

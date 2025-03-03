@@ -7,7 +7,7 @@
 }
 
 @mixin breakpoint-down($breakpoint) {
-  @media (max-width: vars.breakpoint($breakpoint) - 1px) {
+  @media (max-width: (vars.breakpoint($breakpoint) - 1px)) {
     @content;
   }
 }

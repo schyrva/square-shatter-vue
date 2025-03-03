@@ -57,7 +57,3 @@ function addToCart(product: Product) {
     </q-card-actions>
   </q-card>
 </template>
-
-<style scoped>
-/* Styles moved to global ui-components.css */
-</style>

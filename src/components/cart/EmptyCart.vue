@@ -12,6 +12,3 @@ const emit = defineEmits<{
   </div>
 </template>
 
-<style scoped>
-/* Styles moved to global cart.css */
-</style>

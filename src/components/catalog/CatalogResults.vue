@@ -3,7 +3,6 @@ import type { Product } from '../../types';
 import ProductCard from './ProductCard.vue';
 import NoResultsMessage from './NoResultsMessage.vue';
 
-// Деструктуризацію не використовуємо для props, щоб уникнути втрати реактивності
 const { products } = defineProps<{
   products: Product[];
 }>();

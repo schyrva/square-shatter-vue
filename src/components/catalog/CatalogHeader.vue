@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Component for catalog header
 defineProps<{
   title: string;
 }>();

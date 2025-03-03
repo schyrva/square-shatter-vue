@@ -54,7 +54,3 @@ function removeItem() {
     </q-item-section>
   </q-item>
 </template>
-
-<style scoped>
-/* Styles moved to global cart.css */
-</style>

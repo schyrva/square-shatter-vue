@@ -55,4 +55,3 @@ const { useSvg, toggleLabel } = useRenderMode();
     </div>
   </div>
 </template>
-
