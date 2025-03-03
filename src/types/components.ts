@@ -1,3 +1,5 @@
+import type { Product } from './product';
+
 export interface ToggleProps {
   modelValue: boolean;
   label?: string;

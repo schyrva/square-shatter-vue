@@ -71,7 +71,7 @@ function closeDialog() {
 
           <div class="q-mb-md">
             <q-rating
-              :model-value="props.product.rating"
+              :model-value="props.product?.rating ?? 0"
               :max="5"
               size="1.5em"
               color="amber"
