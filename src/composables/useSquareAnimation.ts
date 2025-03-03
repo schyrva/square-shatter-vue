@@ -73,7 +73,6 @@ export function useSquareAnimation() {
   }
 
   function animate(): void {
-    console.log('Animation frame - scale:', state.scale);
     state.animationId = requestAnimationFrame(animate);
 
     if (state.growing) {
@@ -100,7 +99,6 @@ export function useSquareAnimation() {
   }
 
   function updateDimensions(containerWidth: number, containerHeight: number): void {
-    console.log('Updating dimensions:', containerWidth, containerHeight);
     state.canvasWidth = containerWidth;
     state.canvasHeight = containerHeight;
 
@@ -117,7 +115,6 @@ export function useSquareAnimation() {
   }
 
   onMounted(() => {
-    console.log('useSquareAnimation mounted, starting animation');
     animate();
   });
 
