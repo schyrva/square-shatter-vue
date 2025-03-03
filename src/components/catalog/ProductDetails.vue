@@ -47,9 +47,9 @@ function closeDialog() {
 
 <template>
   <q-dialog v-model="dialogVisible" persistent>
-    <q-card v-if="product" style="width: 700px; max-width: 90vw">
+    <q-card v-if="props.product" style="width: 700px; max-width: 90vw">
       <q-card-section class="row items-center">
-        <div class="text-h6">{{ product.name }}</div>
+        <div class="text-h6">{{ props.product.name }}</div>
         <q-space />
         <q-btn icon="close" flat round dense @click="closeDialog" />
       </q-card-section>
@@ -58,23 +58,32 @@ function closeDialog() {
 
       <q-card-section class="row q-col-gutter-md">
         <div class="col-12 col-sm-6">
-          <q-img :src="product.image" style="width: 100%; height: 300px; object-fit: contain" />
+          <q-img
+            :src="props.product.image"
+            style="width: 100%; height: 300px; object-fit: contain"
+          />
         </div>
 
         <div class="col-12 col-sm-6">
           <div class="text-subtitle1 text-weight-bold text-primary q-mb-md">
-            ${{ product.price.toFixed(2) }}
+            ${{ props.product.price.toFixed(2) }}
           </div>
 
           <div class="q-mb-md">
-            <q-rating v-model="product.rating" :max="5" size="1.5em" color="amber" readonly />
+            <q-rating
+              :model-value="props.product.rating"
+              :max="5"
+              size="1.5em"
+              color="amber"
+              readonly
+            />
           </div>
 
           <q-chip color="primary" text-color="white" class="q-mb-md text-capitalize">
-            {{ product.category }}
+            {{ props.product.category }}
           </q-chip>
 
-          <p class="text-body1">{{ product.description }}</p>
+          <p class="text-body1">{{ props.product.description }}</p>
 
           <div class="row items-center q-mt-lg">
             <div class="col-6">

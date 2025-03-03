@@ -4,7 +4,7 @@ import { useSquareAnimation } from '../../composables/useSquareAnimation';
 import CanvasRenderer from './Canvas.vue';
 import SVGRenderer from './SVG.vue';
 
-const _props = defineProps<{
+const props = defineProps<{
   useSvg: boolean;
 }>();
 
@@ -31,7 +31,7 @@ onUnmounted(() => {
 <template>
   <div ref="containerRef" class="square-shatter-container">
     <CanvasRenderer
-      v-if="!useSvg"
+      v-if="!props.useSvg"
       :fragments="state.fragments"
       :scale="state.scale"
       :square-center="state.squareCenter"

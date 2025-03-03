@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { ref, computed, _onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { useProductStore } from '../stores/ProductStore';
 import ProductCard from '../components/catalog/ProductCard.vue';
 import ProductDetails from '../components/catalog/ProductDetails.vue';
 import CartDialog from '../components/cart/CartDialog.vue';
-import { useCartStore } from '../stores/CartStore';
-import type { Product } from '../stores/ProductStore';
+import type { Product } from '../types';
 
 const productStore = useProductStore();
-const _cartStore = useCartStore();
 
 // Filters
 const selectedCategory = ref<string>('all');

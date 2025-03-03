@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Define props with interface and validation
-const _props = defineProps<{
+const props = defineProps<{
   modelValue: boolean;
   label?: string;
 }>();
@@ -18,10 +18,10 @@ function toggle(event: Event) {
 <template>
   <div class="toggle-wrapper">
     <label class="toggle">
-      <input type="checkbox" :checked="modelValue" @input="toggle" />
+      <input type="checkbox" :checked="props.modelValue" @input="toggle" />
       <span class="toggle-slider"></span>
     </label>
-    <span v-if="label" class="toggle-label">{{ label }}</span>
+    <span v-if="props.label" class="toggle-label">{{ props.label }}</span>
   </div>
 </template>
 
