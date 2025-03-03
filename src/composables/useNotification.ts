@@ -1,40 +1,15 @@
-import { useQuasar } from 'quasar';
+import { useNotificationStore } from '../stores/NotificationStore';
+import type { NotificationType } from '../stores/NotificationStore';
 
 /**
- * Composable for displaying notifications using Quasar's notify plugin
+ * Composable for displaying notifications using the NotificationStore
+ * This maintains the same API for backward compatibility
  */
 export function useNotification() {
-  const $q = useQuasar();
-
-  /**
-   * Show a notification with the given message and type
-   * @param message The message to display
-   * @param type The type of notification (positive, negative, warning, info)
-   * @param timeout How long to display the notification (in ms)
-   */
-  function showNotification(
-    message: string,
-    type: 'positive' | 'negative' | 'warning' | 'info' = 'positive',
-    timeout = 2000
-  ) {
-    $q.notify({
-      message,
-      color: type,
-      position: 'top-right',
-      timeout,
-      actions: [
-        {
-          icon: 'close',
-          color: 'white',
-          handler: () => {
-            /* close */
-          },
-        },
-      ],
-    });
-  }
+  const notificationStore = useNotificationStore();
 
   return {
-    showNotification,
+    showNotification: (message: string, type: NotificationType = 'positive', timeout = 2000) =>
+      notificationStore.showNotification(message, type, timeout),
   };
 }

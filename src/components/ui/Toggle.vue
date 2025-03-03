@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Define props with interface and validation
-const props = defineProps<{
+const _props = defineProps<{
   modelValue: boolean;
   label?: string;
 }>();

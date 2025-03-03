@@ -15,7 +15,7 @@ export interface ProductFilters {
   sortBy: string;
 }
 
-export interface ProductState {
+export interface _ProductState {
   products: Product[];
   filters: ProductFilters;
 }

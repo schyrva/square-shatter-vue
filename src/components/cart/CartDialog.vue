@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useCartStore } from '../../stores/CartStore';
 import { useQuasar } from 'quasar';
 import CartItem from './CartItem.vue';
@@ -10,6 +10,7 @@ import { useNotification } from '../../composables/useNotification';
 const $q = useQuasar();
 const cartStore = useCartStore();
 const { showNotification } = useNotification();
+const isProcessing = ref(false);
 
 const visible = computed({
   get: () => cartStore.isOpen,
@@ -18,9 +19,22 @@ const visible = computed({
   },
 });
 
-function checkout() {
-  showNotification('Checkout not implemented in this demo', 'info');
-  cartStore.closeCart();
+async function checkout() {
+  try {
+    isProcessing.value = true;
+    // Simulate API call to process checkout
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // Clear cart after successful checkout
+    cartStore.clearCart();
+    showNotification('Checkout completed successfully!', 'positive');
+    cartStore.closeCart();
+  } catch (error) {
+    console.error('Checkout error:', error);
+    showNotification('Failed to process checkout. Please try again.', 'negative');
+  } finally {
+    isProcessing.value = false;
+  }
 }
 </script>
 
@@ -50,6 +64,7 @@ function checkout() {
       <CartSummary
         v-if="cartStore.totalItems > 0"
         :total-price="cartStore.totalPrice"
+        :is-processing="isProcessing"
         @continue-shopping="cartStore.closeCart"
         @checkout="checkout"
       />

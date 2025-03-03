@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { computed, ref, watch } from 'vue';
 import { useProductStore } from './ProductStore';
-import type { CartItem, CartProduct, CartState } from '../types/cart';
+import type { CartItem, CartProduct, _CartState } from '../types/cart';
 
 export const useCartStore = defineStore('cart', () => {
   // State

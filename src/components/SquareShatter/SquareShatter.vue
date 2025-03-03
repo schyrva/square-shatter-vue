@@ -4,7 +4,7 @@ import { useSquareAnimation } from '../../composables/useSquareAnimation';
 import CanvasRenderer from './Canvas.vue';
 import SVGRenderer from './SVG.vue';
 
-const props = defineProps<{
+const _props = defineProps<{
   useSvg: boolean;
 }>();
 

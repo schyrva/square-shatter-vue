@@ -11,7 +11,7 @@ export interface CartProduct {
   total: number;
 }
 
-export interface CartState {
+export interface _CartState {
   items: CartItem[];
   isOpen: boolean;
 }

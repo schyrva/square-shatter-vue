@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, _onMounted } from 'vue';
 import { useProductStore } from '../stores/ProductStore';
 import ProductCard from '../components/catalog/ProductCard.vue';
 import ProductDetails from '../components/catalog/ProductDetails.vue';
@@ -8,7 +8,7 @@ import { useCartStore } from '../stores/CartStore';
 import type { Product } from '../stores/ProductStore';
 
 const productStore = useProductStore();
-const cartStore = useCartStore();
+const _cartStore = useCartStore();
 
 // Filters
 const selectedCategory = ref<string>('all');
@@ -132,8 +132,8 @@ function resetFilters() {
             label="Reset Filters"
             outline
             color="primary"
-            @click="resetFilters"
             icon="refresh"
+            @click="resetFilters"
           />
         </div>
       </div>

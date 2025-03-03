@@ -3,7 +3,7 @@ import { useCartStore } from '../../stores/CartStore';
 import type { Product } from '../../types';
 import { useNotification } from '../../composables/useNotification';
 
-const props = defineProps<{
+const _props = defineProps<{
   product: Product;
 }>();
 
