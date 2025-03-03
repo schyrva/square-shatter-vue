@@ -1,32 +1,18 @@
 <script setup lang="ts">
 import { useCartStore } from '../../stores/CartStore';
-import { useQuasar } from 'quasar';
-import type { Product } from '../../stores/ProductStore';
+import type { Product } from '../../types';
+import { useNotification } from '../../composables/useNotification';
 
 const props = defineProps<{
   product: Product;
 }>();
 
 const cartStore = useCartStore();
-const $q = useQuasar();
+const { showNotification } = useNotification();
 
 function addToCart(product: Product) {
   cartStore.addToCart(product.id);
-  $q.notify({
-    message: `${product.name} added to cart`,
-    color: 'positive',
-    position: 'top-right',
-    timeout: 2000,
-    actions: [
-      {
-        icon: 'close',
-        color: 'white',
-        handler: () => {
-          /* close */
-        },
-      },
-    ],
-  });
+  showNotification(`${product.name} added to cart`, 'positive', 2000);
 }
 </script>
 

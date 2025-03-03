@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useCartStore } from '../../stores/CartStore';
-import { useQuasar } from 'quasar';
-import type { Product } from '../../stores/ProductStore';
+import type { Product } from '../../types';
+import { useNotification } from '../../composables/useNotification';
 
 const props = defineProps<{
   product: Product | null;
@@ -14,7 +14,7 @@ const emit = defineEmits<{
 }>();
 
 const cartStore = useCartStore();
-const $q = useQuasar();
+const { showNotification } = useNotification();
 const quantity = ref(1);
 
 const dialogVisible = computed({
@@ -31,21 +31,7 @@ const dialogVisible = computed({
 function addToCart() {
   if (props.product) {
     cartStore.addToCart(props.product.id, quantity.value);
-    $q.notify({
-      message: `${quantity.value} ${props.product.name} added to cart`,
-      color: 'positive',
-      position: 'top-right',
-      timeout: 2000,
-      actions: [
-        {
-          icon: 'close',
-          color: 'white',
-          handler: () => {
-            /* close */
-          },
-        },
-      ],
-    });
+    showNotification(`${quantity.value} ${props.product.name} added to cart`, 'positive', 2000);
     dialogVisible.value = false;
   }
 }
