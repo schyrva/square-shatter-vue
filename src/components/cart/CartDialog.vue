@@ -19,6 +19,24 @@ const visible = computed({
   },
 });
 
+const isSmallScreen = computed(() => {
+  return $q.screen.lt.sm;
+});
+
+const dialogClasses = computed(() => {
+  return {
+    'cart-dialog-container': true,
+    'q-dialog--maximized': isSmallScreen.value,
+  };
+});
+
+const cardClasses = computed(() => {
+  return {
+    'cart-dialog': true,
+    'cart-dialog-full-width': isSmallScreen.value,
+  };
+});
+
 async function checkout() {
   try {
     isProcessing.value = true;
@@ -39,8 +57,16 @@ async function checkout() {
 </script>
 
 <template>
-  <q-dialog v-model="visible" :maximized="$q.screen.lt.sm" position="right" persistent full-width>
-    <q-card class="cart-dialog">
+  <q-dialog
+    v-model="visible"
+    :maximized="isSmallScreen"
+    position="right"
+    persistent
+    full-width
+    :full-height="isSmallScreen"
+    :class="dialogClasses"
+  >
+    <q-card :class="cardClasses">
       <q-card-section class="row items-center q-pb-none">
         <div class="text-h6">Your Cart</div>
         <q-space />
