@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useCartStore } from '../../stores/CartStore';
+import { useCartStore } from '@/stores/CartStore';
 import { useQuasar } from 'quasar';
 import CartItem from './CartItem.vue';
 import CartSummary from './CartSummary.vue';
 import EmptyCart from './EmptyCart.vue';
-import { useNotification } from '../../composables/useNotification';
+import { useNotification } from '@/composables/useNotification';
 
 const $q = useQuasar();
 const cartStore = useCartStore();
 const { showNotification } = useNotification();
 
 const visible = computed({
-  get: () => cartStore.isCartOpen,
+  get: () => cartStore.isOpen,
   set: (value) => {
     if (!value) cartStore.closeCart();
   },

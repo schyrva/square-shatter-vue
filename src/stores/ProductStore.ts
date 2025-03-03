@@ -1,17 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-
-// Define the Product type
-export interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  category: string;
-  available: boolean;
-  rating: number;
-}
+import type { Product, ProductFilters, ProductState } from '../types/product';
 
 export const useProductStore = defineStore('products', () => {
   // State
@@ -52,7 +41,7 @@ export const useProductStore = defineStore('products', () => {
       name: 'Mountain Explorer',
       description: 'Designed for challenging terrains and mountain trails. Robust and reliable.',
       price: 2990,
-      image: '/src/assets/landing/images/products/sporty-4.png', // Reusing existing image
+      image: '/src/assets/landing/images/products/sporty-4.png',
       category: 'mountain',
       available: true,
       rating: 4,
@@ -62,7 +51,7 @@ export const useProductStore = defineStore('products', () => {
       name: 'Urban Commuter',
       description: 'Perfect for daily commuting in the city. Lightweight and comfortable.',
       price: 1890,
-      image: '/src/assets/landing/images/products/ride-in-town-st.png', // Reusing existing image
+      image: '/src/assets/landing/images/products/ride-in-town-st.png',
       category: 'urban',
       available: true,
       rating: 3,
@@ -72,20 +61,63 @@ export const useProductStore = defineStore('products', () => {
       name: 'Speed Pro',
       description: 'Built for speed and efficiency on roads. Aerodynamic design for performance.',
       price: 3290,
-      image: '/src/assets/landing/images/products/agile-ride-3.png', // Reusing existing image
+      image: '/src/assets/landing/images/products/agile-ride-3.png',
       category: 'road',
       available: true,
       rating: 2,
     },
   ]);
 
+  const filters = ref<ProductFilters>({
+    category: 'all',
+    searchQuery: '',
+    sortBy: 'name-asc',
+  });
+
   // Getters
   const getProductById = computed(() => {
     return (productId: number) => products.value.find((p) => p.id === productId);
   });
 
-  const getProductsByCategory = computed(() => {
-    return (category: string) => products.value.filter((p) => p.category === category);
+  const filteredProducts = computed(() => {
+    let result = [...products.value];
+
+    // Apply category filter
+    if (filters.value.category !== 'all') {
+      result = result.filter((product) => product.category === filters.value.category);
+    }
+
+    // Apply search filter
+    if (filters.value.searchQuery) {
+      const query = filters.value.searchQuery.toLowerCase();
+      result = result.filter(
+        (product) =>
+          product.name.toLowerCase().includes(query) ||
+          product.description.toLowerCase().includes(query)
+      );
+    }
+
+    // Apply sorting
+    const [field, direction] = filters.value.sortBy.split('-');
+    result.sort((a, b) => {
+      let comparison = 0;
+
+      switch (field) {
+        case 'name':
+          comparison = a.name.localeCompare(b.name);
+          break;
+        case 'price':
+          comparison = a.price - b.price;
+          break;
+        case 'rating':
+          comparison = a.rating - b.rating;
+          break;
+      }
+
+      return direction === 'asc' ? comparison : -comparison;
+    });
+
+    return result;
   });
 
   const categories = computed(() => {
@@ -95,6 +127,18 @@ export const useProductStore = defineStore('products', () => {
   });
 
   // Actions
+  function updateFilters(newFilters: Partial<ProductFilters>) {
+    filters.value = { ...filters.value, ...newFilters };
+  }
+
+  function resetFilters() {
+    filters.value = {
+      category: 'all',
+      searchQuery: '',
+      sortBy: 'name-asc',
+    };
+  }
+
   function updateProduct(product: Product) {
     const index = products.value.findIndex((p) => p.id === product.id);
     if (index !== -1) {
@@ -103,10 +147,16 @@ export const useProductStore = defineStore('products', () => {
   }
 
   return {
+    // State
     products,
+    filters,
+    // Getters
     getProductById,
-    getProductsByCategory,
+    filteredProducts,
     categories,
+    // Actions
+    updateFilters,
+    resetFilters,
     updateProduct,
   };
 });
