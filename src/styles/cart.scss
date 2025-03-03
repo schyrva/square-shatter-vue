@@ -1,15 +1,12 @@
-// Cart Styles
 @use 'variables' as vars;
 @use 'mixins' as mix;
 
-// Cart Dialog
 .cart-dialog {
   width: 100%;
   max-width: 500px;
   height: 100%;
 }
 
-// Cart Item
 .cart-item-image {
   width: 80px;
   height: 80px;
@@ -27,7 +24,6 @@
   text-align: center;
 }
 
-// Empty Cart
 .empty-cart {
   display: flex;
   flex-direction: column;
@@ -49,7 +45,6 @@
   }
 }
 
-// Responsive styles
 @media (max-width: 600px) {
   .cart-dialog {
     max-width: 100%;

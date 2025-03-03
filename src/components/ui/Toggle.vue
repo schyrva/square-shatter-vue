@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Define props with interface and validation
 const props = defineProps<{
   modelValue: boolean;
   label?: string;
@@ -24,7 +23,3 @@ function toggle(event: Event) {
     <span v-if="props.label" class="toggle-label">{{ props.label }}</span>
   </div>
 </template>
-
-<style scoped>
-/* Styles moved to global ui-components.css */
-</style>

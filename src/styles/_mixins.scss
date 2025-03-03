@@ -1,8 +1,5 @@
-// Mixins
-// ------------------------------
 @use 'variables' as vars;
 
-// Responsive breakpoints
 @mixin breakpoint-up($breakpoint) {
   @media (min-width: vars.breakpoint($breakpoint)) {
     @content;
@@ -15,7 +12,6 @@
   }
 }
 
-// Flexbox utilities
 @mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
   display: flex;
   flex-direction: $direction;
@@ -24,7 +20,6 @@
   flex-wrap: $wrap;
 }
 
-// Grid utilities
 @mixin grid($columns: 1, $gap: vars.spacing('md')) {
   display: grid;
   grid-template-columns: repeat($columns, 1fr);
@@ -38,23 +33,19 @@
   line-height: $line-height;
 }
 
-// Box shadow
 @mixin box-shadow($level: 'md') {
   box-shadow: vars.shadow($level);
 }
 
-// Transitions
 @mixin transition($property: all, $speed: 'normal', $easing: ease-in-out) {
   transition: $property vars.transition($speed) $easing;
 }
 
-// Focus styles
 @mixin focus-outline {
   outline: 2px solid vars.color('focus');
   outline-offset: 2px;
 }
 
-// Container
 @mixin container($max-width: 1400px, $padding: vars.spacing('md')) {
   width: 100%;
   max-width: $max-width;
@@ -64,14 +55,12 @@
   padding-right: $padding;
 }
 
-// Truncate text with ellipsis
 @mixin truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-// Clearfix (for legacy support)
 @mixin clearfix {
   &::after {
     content: '';
@@ -80,7 +69,6 @@
   }
 }
 
-// Visually hide element but keep it accessible for screen readers
 @mixin visually-hidden {
   position: absolute;
   width: 1px;
@@ -93,7 +81,6 @@
   border: 0;
 }
 
-// Button styles
 @mixin button-base {
   display: inline-flex;
   align-items: center;

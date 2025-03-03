@@ -18,7 +18,3 @@ const route = useRoute();
 
   <CartDialog />
 </template>
-
-<style scoped>
-/* Styles moved to global layout.css */
-</style>

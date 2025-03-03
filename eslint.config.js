@@ -63,7 +63,6 @@ export default [
     files: ['**/*.{js,ts}'],
     languageOptions: {
       globals: {
-        // Add browser globals for non-Vue files too
         window: 'readonly',
         document: 'readonly',
         console: 'readonly',

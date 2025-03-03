@@ -6,22 +6,18 @@ import { computed, ref } from 'vue';
 const route = useRoute();
 const isMenuOpen = ref(false);
 
-// Перевіряємо, чи показувати кошик в хедері
 const showCart = computed(() => {
-  return true; // Тепер показуємо кошик завжди
+  return true;
 });
 
-// Перевіряємо, чи зараз відображається сторінка landing
 const isLandingPage = computed(() => {
   return route.path === '/landing';
 });
 
-// Функція для перемикання стану меню
 function toggleMenu() {
   isMenuOpen.value = !isMenuOpen.value;
 }
 
-// Функція для закриття меню при кліку на пункт меню
 function closeMenu() {
   isMenuOpen.value = false;
 }
@@ -34,7 +30,6 @@ function closeMenu() {
         <router-link to="/" class="logo-link">TestTask</router-link>
       </div>
 
-      <!-- Навігаційне меню -->
       <nav class="main-nav flex justify-center" :class="{ 'menu-open': isMenuOpen }">
         <router-link to="/" @click="closeMenu">Animation</router-link>
         <router-link to="/landing" @click="closeMenu">Landing</router-link>
@@ -45,7 +40,6 @@ function closeMenu() {
         <CartIcon v-if="showCart" />
       </div>
 
-      <!-- Мобільне бургер-меню -->
       <div class="burger-menu">
         <q-btn
           flat
@@ -58,22 +52,17 @@ function closeMenu() {
       </div>
     </div>
 
-    <!-- Overlay для закриття меню при кліку зовні -->
     <div v-if="isMenuOpen" class="menu-overlay" @click="closeMenu"></div>
   </header>
 </template>
 
 <style scoped>
-/* Спеціальні стилі для сторінки landing */
 .app-header.landing-page {
-  /* Налаштування для запобігання перекриттю з меню landing page */
-  z-index: 5; /* Нижчий z-index, ніж у меню landing page (яке має z-index: 10) */
-
-  /* Опціонально: додаткові стилі для кращої видимості на landing page */
+  z-index: 5;
+  background-color: rgba(255, 255, 255, 0.7);
   background-color: rgba(255, 255, 255, 0.7);
 }
 
-/* На landing page, при відкритому його власному меню, ховаємо глобальний header */
 .app-header.landing-page:has(body:has(.page__menu:target)) {
   opacity: 0;
   pointer-events: none;

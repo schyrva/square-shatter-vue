@@ -1,8 +1,6 @@
-// Common component styles
 @use 'variables' as vars;
 @use 'mixins' as mix;
 
-// Cards
 .card {
   padding: vars.spacing('md');
   border-radius: vars.radius('md');
@@ -19,7 +17,6 @@
   }
 }
 
-// Buttons
 .btn {
   border-radius: vars.radius('md');
   border: 1px solid transparent;
@@ -44,7 +41,6 @@
   }
 }
 
-// Containers
 .container {
   @include mix.container;
 
@@ -53,7 +49,6 @@
   }
 }
 
-// Flex utilities
 .flex {
   display: flex;
 
@@ -82,7 +77,6 @@
   flex-wrap: wrap;
 }
 
-// Gap utilities
 .gap {
   &-sm {
     gap: vars.spacing('sm');

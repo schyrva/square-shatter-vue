@@ -1,8 +1,6 @@
-// UI Component Styles
 @use 'variables' as vars;
 @use 'mixins' as mix;
 
-// Toggle Component
 .toggle {
   position: relative;
   display: inline-block;
@@ -64,7 +62,6 @@
   }
 }
 
-// Card Components
 .info-card {
   flex: 1;
   min-width: 280px;
@@ -81,7 +78,6 @@
   }
 }
 
-// Product Card
 .product {
   &-card {
     height: 100%;
@@ -122,7 +118,6 @@
   }
 }
 
-// Cart Components
 .cart-summary {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   padding-top: vars.spacing('md');
@@ -142,7 +137,6 @@
   }
 }
 
-// Square Shatter Component
 .square-shatter-container {
   position: relative;
   width: 100%;

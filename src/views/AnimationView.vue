@@ -3,7 +3,6 @@ import SquareShatter from '../components/SquareShatter/index.vue';
 import Toggle from '../components/ui/Toggle.vue';
 import useRenderMode from '../composables/useRenderMode';
 
-// Використовуємо composable для керування режимом рендерингу на рівні батьківського компонента
 const { useSvg, toggleLabel } = useRenderMode();
 </script>
 
@@ -57,6 +56,3 @@ const { useSvg, toggleLabel } = useRenderMode();
   </div>
 </template>
 
-<style scoped>
-/* Styles moved to global animation.css */
-</style>

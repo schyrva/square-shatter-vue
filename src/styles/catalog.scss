@@ -1,4 +1,3 @@
-// Catalog View Styles
 @use 'variables' as vars;
 @use 'mixins' as mix;
 
@@ -104,8 +103,6 @@
   }
 }
 
-// Product styling - додаткові стилі для карток продуктів
-// у каталозі, вони доповнюють глобальні стилі продуктів з ui-components.scss
 .product-card {
   transition:
     transform 0.3s ease,
@@ -146,7 +143,6 @@
   margin-top: auto;
 }
 
-// Responsive styles
 @media (max-width: 768px) {
   .catalog-header {
     padding: 0.8rem;

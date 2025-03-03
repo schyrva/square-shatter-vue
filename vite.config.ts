@@ -11,7 +11,6 @@ export default defineConfig({
     },
   },
   build: {
-    // Improve build performance and output
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -19,7 +18,6 @@ export default defineConfig({
         drop_debugger: true,
       },
     },
-    // Split chunks for better caching
     rollupOptions: {
       output: {
         manualChunks: {

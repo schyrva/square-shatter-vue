@@ -1,8 +1,6 @@
-// Base styles for the application
 @use 'variables' as vars;
 @use 'mixins' as mix;
 
-// Root styles
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -16,7 +14,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-// Reset
 *,
 *::before,
 *::after {
@@ -25,14 +22,12 @@
   padding: 0;
 }
 
-// Base elements
 html,
 body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
 
-  // Base scroll behavior
   &,
   #app,
   main,
@@ -60,12 +55,10 @@ body {
   flex-direction: column;
 }
 
-// Special containers that need full scroll restriction
 .square-shatter-container {
   overflow: hidden !important;
 }
 
-// Typography
 a {
   font-weight: 500;
   color: vars.color('focus');
@@ -77,7 +70,6 @@ a {
   }
 }
 
-// Headings
 h1,
 h2,
 h3,
@@ -111,7 +103,6 @@ p {
   margin-bottom: 1em;
 }
 
-// Form elements
 button {
   @include mix.button-base;
   background-color: #1a1a1a;
@@ -147,7 +138,6 @@ select {
   padding: vars.spacing('xl');
 }
 
-// Light theme
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

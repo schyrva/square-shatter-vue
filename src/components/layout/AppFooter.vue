@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Компонент загального футера для всіх сторінок
 const currentYear = new Date().getFullYear();
 </script>
 
@@ -19,6 +18,3 @@ const currentYear = new Date().getFullYear();
   </footer>
 </template>
 
-<style scoped>
-/* Styles moved to global footer.css */
-</style>

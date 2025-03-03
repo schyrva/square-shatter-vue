@@ -3,7 +3,6 @@ import { ref, computed } from 'vue';
 import type { Product, ProductFilters, _ProductState } from '../types/product';
 
 export const useProductStore = defineStore('products', () => {
-  // State
   const products = ref<Product[]>([
     {
       id: 1,
@@ -74,7 +73,6 @@ export const useProductStore = defineStore('products', () => {
     sortBy: 'name-asc',
   });
 
-  // Getters
   const getProductById = computed(() => {
     return (productId: number) => products.value.find((p) => p.id === productId);
   });
@@ -82,12 +80,10 @@ export const useProductStore = defineStore('products', () => {
   const filteredProducts = computed(() => {
     let result = [...products.value];
 
-    // Apply category filter
     if (filters.value.category !== 'all') {
       result = result.filter((product) => product.category === filters.value.category);
     }
 
-    // Apply search filter
     if (filters.value.searchQuery) {
       const query = filters.value.searchQuery.toLowerCase();
       result = result.filter(
@@ -97,7 +93,6 @@ export const useProductStore = defineStore('products', () => {
       );
     }
 
-    // Apply sorting
     const [field, direction] = filters.value.sortBy.split('-');
     result.sort((a, b) => {
       let comparison = 0;
@@ -126,7 +121,6 @@ export const useProductStore = defineStore('products', () => {
     return Array.from(categorySet);
   });
 
-  // Actions
   function updateFilters(newFilters: Partial<ProductFilters>) {
     filters.value = { ...filters.value, ...newFilters };
   }
@@ -147,14 +141,11 @@ export const useProductStore = defineStore('products', () => {
   }
 
   return {
-    // State
     products,
     filters,
-    // Getters
     getProductById,
     filteredProducts,
     categories,
-    // Actions
     updateFilters,
     resetFilters,
     updateProduct,

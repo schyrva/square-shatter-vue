@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Import the landing page styles
 import '../styles/landing/style.scss';
 </script>
 
@@ -282,7 +281,3 @@ import '../styles/landing/style.scss';
     </div>
   </div>
 </template>
-
-<style>
-
-</style>

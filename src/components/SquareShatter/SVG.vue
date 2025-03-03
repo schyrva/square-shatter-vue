@@ -68,7 +68,3 @@ onMounted(() => {
 <template>
   <svg ref="svgRef" class="svg-renderer" width="100%" height="100%"></svg>
 </template>
-
-<style scoped>
-/* Styles moved to global ui-components.css */
-</style>

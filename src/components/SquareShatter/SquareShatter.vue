@@ -48,7 +48,3 @@ onUnmounted(() => {
     />
   </div>
 </template>
-
-<style scoped>
-/* Styles moved to global ui-components.css */
-</style>

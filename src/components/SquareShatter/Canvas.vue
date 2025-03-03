@@ -50,7 +50,3 @@ watch(
 <template>
   <canvas ref="canvasRef" class="canvas-renderer"></canvas>
 </template>
-
-<style scoped>
-/* Styles moved to global ui-components.css */
-</style>

@@ -1,8 +1,6 @@
-// Utility classes
 @use 'variables' as vars;
 @use 'mixins' as mix;
 
-// Basic spacing utilities
 .m-0 {
   margin: 0;
 }
@@ -10,7 +8,6 @@
   padding: 0;
 }
 
-// Auto margins
 .mt-auto {
   margin-top: auto;
 }
@@ -24,7 +21,6 @@
   margin-right: auto;
 }
 
-// Generate margin utility classes
 @each $key, $value in vars.$spacing {
   .m-#{$key} {
     margin: $value;
@@ -42,7 +38,6 @@
     margin-right: $value;
   }
 
-  // Horizontal and vertical margins
   .mx-#{$key} {
     margin-left: $value;
     margin-right: $value;
@@ -53,7 +48,6 @@
     margin-bottom: $value;
   }
 
-  // Padding utilities
   .p-#{$key} {
     padding: $value;
   }
@@ -70,7 +64,6 @@
     padding-right: $value;
   }
 
-  // Horizontal and vertical paddings
   .px-#{$key} {
     padding-left: $value;
     padding-right: $value;
@@ -82,7 +75,6 @@
   }
 }
 
-// Text alignment
 .text {
   &-center {
     text-align: center;
@@ -95,14 +87,12 @@
   }
 }
 
-// Font sizes
 @each $key, $value in vars.$font-sizes {
   .text-#{$key} {
     font-size: $value;
   }
 }
 
-// Font weights
 .font {
   &-bold {
     font-weight: 700;
@@ -115,7 +105,6 @@
   }
 }
 
-// Display utilities
 .block {
   display: block;
 }
@@ -129,7 +118,6 @@
   display: none;
 }
 
-// Position utilities
 .relative {
   position: relative;
 }
@@ -143,7 +131,6 @@
   position: sticky;
 }
 
-// Position coordinates
 .top-0 {
   top: 0;
 }
@@ -157,7 +144,6 @@
   left: 0;
 }
 
-// Dimension utilities
 .w-full {
   width: 100%;
 }
@@ -171,7 +157,6 @@
   height: 100vh;
 }
 
-// Z-index utilities
 $z-indices: (
   0: 0,
   10: 10,
@@ -188,7 +173,6 @@ $z-indices: (
   }
 }
 
-// Overflow utilities
 .overflow {
   &-hidden {
     overflow: hidden;
@@ -207,7 +191,6 @@ $z-indices: (
   }
 }
 
-// Visibility utilities
 .visible {
   visibility: visible;
 }
@@ -215,7 +198,6 @@ $z-indices: (
   visibility: hidden;
 }
 
-// Opacity utilities
 $opacities: (
   0: 0,
   25: 0.25,
@@ -230,7 +212,6 @@ $opacities: (
   }
 }
 
-// Transition utilities
 .transition {
   transition: all vars.transition('normal');
 }

@@ -4,14 +4,11 @@ import { useProductStore } from './ProductStore';
 import type { CartItem, CartProduct, _CartState } from '../types/cart';
 
 export const useCartStore = defineStore('cart', () => {
-  // State
   const items = ref<CartItem[]>([]);
   const isOpen = ref(false);
 
-  // Product store
   const productStore = useProductStore();
 
-  // Initialize cart from localStorage
   try {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
@@ -21,7 +18,6 @@ export const useCartStore = defineStore('cart', () => {
     console.error('Failed to load cart from localStorage:', error);
   }
 
-  // Watch for changes and save to localStorage
   watch(
     items,
     (newItems) => {
@@ -30,7 +26,6 @@ export const useCartStore = defineStore('cart', () => {
     { deep: true }
   );
 
-  // Getters
   const totalItems = computed(() => items.value.reduce((sum, item) => sum + item.quantity, 0));
 
   const cartProducts = computed<CartProduct[]>(() =>
@@ -46,7 +41,6 @@ export const useCartStore = defineStore('cart', () => {
 
   const totalPrice = computed(() => cartProducts.value.reduce((sum, item) => sum + item.total, 0));
 
-  // Actions
   function addToCart(productId: number, quantity = 1) {
     const existingItem = items.value.find((item) => item.productId === productId);
 
@@ -88,14 +82,11 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   return {
-    // State
     items,
     isOpen,
-    // Getters
     totalItems,
     cartProducts,
     totalPrice,
-    // Actions
     addToCart,
     removeFromCart,
     updateQuantity,

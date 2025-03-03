@@ -1,11 +1,8 @@
 @use 'utils' as *;
 @use 'blocks' as *;
 
-// Override base.css styles for landing page
 html,
 body,
 #app {
   height: auto;
 }
-
-// Правила прокрутки тепер централізовані в base.css
