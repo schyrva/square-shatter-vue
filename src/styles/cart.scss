@@ -1,13 +1,15 @@
-/* Cart Styles */
+// Cart Styles
+@use 'variables' as vars;
+@use 'mixins' as mix;
 
-/* Cart Dialog */
+// Cart Dialog
 .cart-dialog {
   width: 100%;
   max-width: 500px;
   height: 100%;
 }
 
-/* Cart Item */
+// Cart Item
 .cart-item-image {
   width: 80px;
   height: 80px;
@@ -25,7 +27,7 @@
   text-align: center;
 }
 
-/* Empty Cart */
+// Empty Cart
 .empty-cart {
   display: flex;
   flex-direction: column;
@@ -33,21 +35,21 @@
   justify-content: center;
   padding: 2rem;
   text-align: center;
+
+  &-icon {
+    font-size: 4rem;
+    color: vars.color('muted');
+    margin-bottom: 1rem;
+  }
+
+  &-message {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: vars.color('text');
+  }
 }
 
-.empty-cart-icon {
-  font-size: 4rem;
-  color: var(--color-muted);
-  margin-bottom: 1rem;
-}
-
-.empty-cart-message {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  color: var(--color-text);
-}
-
-/* Responsive styles */
+// Responsive styles
 @media (max-width: 600px) {
   .cart-dialog {
     max-width: 100%;
@@ -67,30 +69,32 @@
   .q-item {
     flex-wrap: wrap;
     padding: 12px;
-  }
 
-  .q-item__section--avatar {
-    min-width: 80px;
-    padding-right: 12px;
-  }
+    &__section {
+      &--avatar {
+        min-width: 80px;
+        padding-right: 12px;
+      }
 
-  .q-item__section--side {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
+      &--side {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
 
-  .q-item__section--main {
-    padding: 8px 0;
+      &--main {
+        padding: 8px 0;
+      }
+    }
   }
 }
 
 @media (max-width: 400px) {
   .q-item {
     padding: 8px;
-  }
 
-  .q-item__section--avatar {
-    min-width: 60px;
+    &__section--avatar {
+      min-width: 60px;
+    }
   }
 
   .q-img {

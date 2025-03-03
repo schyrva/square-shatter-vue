@@ -1,4 +1,6 @@
-/* Footer Styles */
+// Footer Styles
+@use 'variables' as vars;
+@use 'mixins' as mix;
 
 .app-footer {
   width: 100%;
@@ -28,25 +30,25 @@
   transition: color 0.2s ease;
   text-decoration: none;
   position: relative;
-}
 
-.author-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  left: 0;
-  background-color: var(--color-primary);
-  transition: width 0.3s ease;
-}
+  &::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: vars.color('primary');
+    transition: width 0.3s ease;
+  }
 
-.author-link:hover {
-  color: var(--color-primary);
-}
+  &:hover {
+    color: vars.color('primary');
 
-.author-link:hover::after {
-  width: 100%;
+    &::after {
+      width: 100%;
+    }
+  }
 }
 
 @media (prefers-color-scheme: dark) {

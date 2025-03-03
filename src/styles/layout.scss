@@ -1,14 +1,16 @@
-/* Layout Styles */
+// Layout Styles
+@use 'variables' as vars;
+@use 'mixins' as mix;
 
-/* Main layout */
+// Main layout
 main {
   padding-top: 60px;
   min-height: calc(100vh - 60px);
   width: 100%;
-}
 
-main > :first-child:not(footer) {
-  flex: 1;
+  > :first-child:not(footer) {
+    flex: 1;
+  }
 }
 
 .app-footer {
@@ -16,7 +18,7 @@ main > :first-child:not(footer) {
   width: 100%;
 }
 
-/* Header */
+// Header
 .app-header {
   position: fixed;
   top: 0;
@@ -31,21 +33,21 @@ main > :first-child:not(footer) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--spacing-md);
+  padding: 0 vars.spacing('md');
 }
 
-/* Content containers */
+// Content containers
 .page-container {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: var(--spacing-md);
+  padding: vars.spacing('md');
 }
 
-/* Responsive layout */
+// Responsive layout
 @media (max-width: 768px) {
   .page-container {
-    padding: var(--spacing-sm);
+    padding: vars.spacing('sm');
   }
 
   .app-header {
@@ -55,7 +57,7 @@ main > :first-child:not(footer) {
 
 @media (max-width: 480px) {
   .app-header {
-    padding: 0 var(--spacing-sm);
+    padding: 0 vars.spacing('sm');
   }
 
   .header-content {

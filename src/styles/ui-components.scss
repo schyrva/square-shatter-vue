@@ -1,0 +1,162 @@
+// UI Component Styles
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+// Toggle Component
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: clamp(40px, 8vw, 60px);
+  height: clamp(24px, 4vw, 34px);
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &-label {
+    margin-left: vars.spacing('xs');
+    font-weight: bold;
+    color: vars.color('text');
+    font-size: vars.font-size('xs');
+  }
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .toggle-slider {
+      background-color: vars.color('primary');
+
+      &:before {
+        transform: translateX(calc(100% + 8px));
+      }
+    }
+
+    &:focus + .toggle-slider {
+      box-shadow: 0 0 1px vars.color('primary');
+    }
+  }
+
+  &-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: vars.color('muted');
+    transition: vars.transition('normal');
+    border-radius: vars.radius('full');
+
+    &:before {
+      position: absolute;
+      content: '';
+      height: calc(100% - 8px);
+      width: calc(50% - 8px);
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: vars.transition('normal');
+      border-radius: 50%;
+    }
+  }
+}
+
+// Card Components
+.info-card {
+  flex: 1;
+  min-width: 280px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  padding: vars.spacing('lg');
+  border-radius: vars.radius('lg');
+  box-shadow: vars.shadow('md');
+  @include mix.transition(transform box-shadow, 'fast');
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+  }
+}
+
+// Product Card
+.product {
+  &-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-image {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: vars.radius('md') vars.radius('md') 0 0;
+
+    @include mix.breakpoint-down('sm') {
+      max-height: 200px;
+    }
+  }
+
+  &-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: 2.8em;
+  }
+
+  &-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+// Cart Components
+.cart-summary {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  padding-top: vars.spacing('md');
+
+  @include mix.breakpoint-down('sm') {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    z-index: 2;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.quantity-controls {
+  @include mix.breakpoint-down('sm') {
+    flex-wrap: nowrap;
+  }
+}
+
+// Square Shatter Component
+.square-shatter-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: vars.radius('lg');
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.svg-renderer,
+.canvas-renderer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

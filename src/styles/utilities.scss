@@ -1,0 +1,242 @@
+// Utility classes
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+// Basic spacing utilities
+.m-0 {
+  margin: 0;
+}
+.p-0 {
+  padding: 0;
+}
+
+// Auto margins
+.mt-auto {
+  margin-top: auto;
+}
+.mb-auto {
+  margin-bottom: auto;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.mr-auto {
+  margin-right: auto;
+}
+
+// Generate margin utility classes
+@each $key, $value in vars.$spacing {
+  .m-#{$key} {
+    margin: $value;
+  }
+  .mt-#{$key} {
+    margin-top: $value;
+  }
+  .mb-#{$key} {
+    margin-bottom: $value;
+  }
+  .ml-#{$key} {
+    margin-left: $value;
+  }
+  .mr-#{$key} {
+    margin-right: $value;
+  }
+
+  // Horizontal and vertical margins
+  .mx-#{$key} {
+    margin-left: $value;
+    margin-right: $value;
+  }
+
+  .my-#{$key} {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+
+  // Padding utilities
+  .p-#{$key} {
+    padding: $value;
+  }
+  .pt-#{$key} {
+    padding-top: $value;
+  }
+  .pb-#{$key} {
+    padding-bottom: $value;
+  }
+  .pl-#{$key} {
+    padding-left: $value;
+  }
+  .pr-#{$key} {
+    padding-right: $value;
+  }
+
+  // Horizontal and vertical paddings
+  .px-#{$key} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+
+  .py-#{$key} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+}
+
+// Text alignment
+.text {
+  &-center {
+    text-align: center;
+  }
+  &-left {
+    text-align: left;
+  }
+  &-right {
+    text-align: right;
+  }
+}
+
+// Font sizes
+@each $key, $value in vars.$font-sizes {
+  .text-#{$key} {
+    font-size: $value;
+  }
+}
+
+// Font weights
+.font {
+  &-bold {
+    font-weight: 700;
+  }
+  &-medium {
+    font-weight: 500;
+  }
+  &-normal {
+    font-weight: 400;
+  }
+}
+
+// Display utilities
+.block {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.inline {
+  display: inline;
+}
+.hidden {
+  display: none;
+}
+
+// Position utilities
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.fixed {
+  position: fixed;
+}
+.sticky {
+  position: sticky;
+}
+
+// Position coordinates
+.top-0 {
+  top: 0;
+}
+.right-0 {
+  right: 0;
+}
+.bottom-0 {
+  bottom: 0;
+}
+.left-0 {
+  left: 0;
+}
+
+// Dimension utilities
+.w-full {
+  width: 100%;
+}
+.h-full {
+  height: 100%;
+}
+.w-screen {
+  width: 100vw;
+}
+.h-screen {
+  height: 100vh;
+}
+
+// Z-index utilities
+$z-indices: (
+  0: 0,
+  10: 10,
+  20: 20,
+  30: 30,
+  40: 40,
+  50: 50,
+  auto: auto,
+);
+
+@each $name, $value in $z-indices {
+  .z-#{$name} {
+    z-index: $value;
+  }
+}
+
+// Overflow utilities
+.overflow {
+  &-hidden {
+    overflow: hidden;
+  }
+  &-auto {
+    overflow: auto;
+  }
+  &-scroll {
+    overflow: scroll;
+  }
+  &-x-hidden {
+    overflow-x: hidden;
+  }
+  &-y-auto {
+    overflow-y: auto;
+  }
+}
+
+// Visibility utilities
+.visible {
+  visibility: visible;
+}
+.invisible {
+  visibility: hidden;
+}
+
+// Opacity utilities
+$opacities: (
+  0: 0,
+  25: 0.25,
+  50: 0.5,
+  75: 0.75,
+  100: 1,
+);
+
+@each $name, $value in $opacities {
+  .opacity-#{$name} {
+    opacity: $value;
+  }
+}
+
+// Transition utilities
+.transition {
+  transition: all vars.transition('normal');
+}
+.transition-fast {
+  transition: all vars.transition('fast');
+}
+.transition-slow {
+  transition: all vars.transition('slow');
+}

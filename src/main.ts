@@ -4,15 +4,7 @@ import router from './router';
 import { createPinia } from 'pinia';
 
 // Import styles
-import './styles/base.css';
-import './styles/components.css';
-import './styles/utilities.css';
-import './styles/ui-components.css';
-import './styles/animation.css';
-import './styles/layout.css';
-import './styles/cart.css';
-import './styles/footer.css';
-import './styles/catalog.css';
+import './styles/main.scss';
 
 // Import Quasar
 import { Quasar, ClosePopup, Notify, Dialog } from 'quasar';
