@@ -13,3 +13,10 @@ export type Polygon = Point[];
 
 // Represents a line segment defined by two points
 export type Line = [Point, Point];
+
+export interface Fragment {
+  vertices: Polygon;
+  centroid: Point;
+  localOffsets: Point[];
+  color: string;
+}
