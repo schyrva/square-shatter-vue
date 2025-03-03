@@ -203,7 +203,7 @@ import '../styles/landing/style.scss';
                 </article>
 
                 <div class="details__button">
-                  <a href="#about-us" class="button details__button-link"> Explore </a>
+                  <a href="/catalog" class="button details__button-link"> Explore </a>
                 </div>
               </div>
             </section>
@@ -252,8 +252,8 @@ import '../styles/landing/style.scss';
                     </div>
                     <div class="contacts__contact-item contacts__contact-item--email">
                       <p class="contacts__contact-title">Email</p>
-                      <a href="mailto:hello@miami.com" class="contacts__contact-link">
-                        hello@miami.com
+                      <a href="mailto:stanislav.chyrva@gmail.com" class="contacts__contact-link">
+                        stanislav.chyrva@gmail.com
                       </a>
                     </div>
                     <div class="contacts__contact-item contacts__contact-item--address">
@@ -284,5 +284,5 @@ import '../styles/landing/style.scss';
 </template>
 
 <style>
-/* This empty style block with scoped removed ensures that our landing styles take precedence */
+
 </style>
