@@ -2,6 +2,12 @@
 
 A modern Vue 3 application showcasing interactive animations and e-commerce functionality using TypeScript, Pinia, Vue Router, and Quasar Framework.
 
+## Demo & Repository
+
+- **Live Demo**: [Square Shatter Vue Demo](https://square-shatter-vue.vercel.app/) 
+
+- **Repository**: [GitHub Repository](https://github.com/schyrva/square-shatter-vue)
+
 ## Features
 
 - Dynamic Square Shatter animation with Canvas and SVG rendering modes
@@ -74,6 +80,34 @@ square-shatter-vue/
 - **Vite**: Build tool and development server
 - **ESLint & Prettier**: Code quality and formatting
 
+## Key Implementation Details
+
+### Animation System
+
+The Square Shatter animation showcases the power of Vue's reactivity system combined with canvas/SVG rendering. Users can switch between rendering modes and customize the animation parameters in real-time.
+
+### State Management
+
+The application uses Pinia for state management with a well-organized store structure:
+
+- `CartStore`: Manages shopping cart state and operations
+- `ProductStore`: Handles product catalog data and filtering
+- `NotificationStore`: Controls application notifications
+
+### Responsive Design
+
+The application is fully responsive with a mobile-first approach:
+
+- Adaptive layouts for all screen sizes
+- Mobile-optimized cart and navigation
+- Touch-friendly UI elements
+
+### Performance Optimization
+
+- Lazy loading of components and routes
+- Efficient state management
+- Optimized rendering with Vue 3's reactivity system
+
 ## Best Practices
 
 - **Component Organization**: Components are organized by feature and functionality
@@ -82,6 +116,10 @@ square-shatter-vue/
 - **Code Formatting**: Consistent code style with ESLint and Prettier
 - **Responsive Design**: Mobile-first approach with adaptive layouts
 
-## License
+## Contact
 
-MIT
+For any inquiries or feedback, please contact:
+
+- **Stanislav Chyrva**
+- GitHub: [@schyrva](https://github.com/schyrva)
+- Email: [stanislav.chyrva@gmail.com](mailto:stanislav.chyrva@gmail.com)
